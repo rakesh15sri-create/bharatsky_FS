@@ -29,40 +29,128 @@ function Logo({ className = '' }) {
   );
 }
 
+/* Full-screen menu for phones and tablets (hidden from lg up) */
+function MobileMenu({ open, onClose }) {
+  return (
+    <div
+      id="mobile-menu"
+      aria-hidden={!open}
+      className={`fixed inset-0 z-40 flex h-dvh flex-col overflow-y-auto bg-night px-6 pb-8 pt-[100px] text-white transition-[opacity,visibility] duration-300 sm:px-10 sm:pt-[120px] lg:hidden ${
+        open ? 'visible opacity-100' : 'invisible opacity-0'
+      }`}
+    >
+      {/* soft brand glow */}
+      <span className="pointer-events-none absolute -right-32 -top-32 size-[420px] rounded-full bg-[radial-gradient(circle,rgba(255,90,31,.28),transparent_65%)]" />
+
+      <span className="relative mb-6 text-xs font-medium uppercase tracking-[.08em] text-[#8a8a8a]">Menu</span>
+
+      <nav className="relative">
+        <ul className="border-t border-white/10">
+          {NAV.map(({ to, label }, i) => (
+            <li
+              key={to}
+              style={{ transitionDelay: open ? `${80 + i * 50}ms` : '0ms' }}
+              className={`border-b border-white/10 transition duration-500 ${open ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
+            >
+              <NavLink
+                to={to}
+                end
+                onClick={onClose}
+                tabIndex={open ? 0 : -1}
+                className={({ isActive }) =>
+                  `group flex items-center justify-between py-4 text-[clamp(30px,9vw,48px)] font-medium tracking-[-.03em] transition-colors sm:py-5 ${
+                    isActive ? 'text-brand' : 'text-white hover:text-brand'
+                  }`
+                }
+              >
+                <span className="flex items-baseline gap-4">
+                  <span className="text-xs font-semibold tracking-normal text-[#6b6b6b]">{String(i + 1).padStart(2, '0')}</span>
+                  {label}
+                </span>
+                <span className="grid size-10 place-items-center rounded-full bg-white/[.06] text-lg transition group-hover:translate-x-1 group-hover:bg-brand group-hover:text-white">→</span>
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div
+        style={{ transitionDelay: open ? '380ms' : '0ms' }}
+        className={`relative mt-auto pt-10 transition duration-500 ${open ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
+      >
+        <Button to="/contact" onClick={onClose} tabIndex={open ? 0 : -1} className="w-full sm:w-auto">Request an introduction</Button>
+        <div className="mt-6 grid gap-3 text-sm text-mute sm:grid-cols-2">
+          <a href={SITE.phoneHref} tabIndex={open ? 0 : -1} className="flex items-center gap-3 hover:text-brand">
+            <span className="grid size-9 place-items-center rounded-full bg-white/[.06]"><Icon name="phone" className="size-4" /></span>
+            {SITE.phone}
+          </a>
+          <a href={`mailto:${SITE.email}`} tabIndex={open ? 0 : -1} className="flex items-center gap-3 hover:text-brand">
+            <span className="grid size-9 place-items-center rounded-full bg-white/[.06]"><Icon name="mail" className="size-4" /></span>
+            {SITE.email}
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Header() {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
+
+  // close on navigation
   useEffect(() => setOpen(false), [pathname]);
 
+  // lock page scroll while open, close on Escape, and close if resized to desktop
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = e => e.key === 'Escape' && setOpen(false);
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const onResize = e => e.matches && setOpen(false);
+    window.addEventListener('keydown', onKey);
+    desktop.addEventListener('change', onResize);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener('keydown', onKey);
+      desktop.removeEventListener('change', onResize);
+    };
+  }, [open]);
+
   return (
-    <header className="sticky top-0 z-50 px-4 pt-3 sm:px-6 sm:pt-[18px]">
-      <nav className="relative mx-auto flex h-[58px] max-w-[1400px] items-center justify-between rounded-full bg-night pl-5 pr-3 shadow-[0_10px_30px_-15px_rgba(0,0,0,.5)] sm:h-16 sm:pl-7">
-        <Logo />
-        <ul
-          className={`absolute left-0 right-0 top-[74px] flex flex-col gap-1 rounded-3xl bg-night p-3.5 transition-opacity duration-200 lg:left-1/2 lg:right-auto lg:top-auto lg:-translate-x-1/2 lg:flex-row lg:bg-transparent lg:p-0 lg:opacity-100 lg:pointer-events-auto ${
-            open ? 'opacity-100' : 'pointer-events-none opacity-0'
-          }`}
-        >
-          {NAV.map(({ to, label }) => (
-            <li key={to}><NavLink to={to} end className={pill}>{label}</NavLink></li>
-          ))}
-        </ul>
-        <div className="flex items-center gap-2 lg:gap-6">
-          <a href={SITE.phoneHref} className="hidden text-[13px] text-white lg:inline">Call Us</a>
-          <Button to="/contact" variant="white" size="sm">Enquire Now</Button>
-          <button
-            className="grid size-9 cursor-pointer place-items-center lg:hidden"
-            aria-label="Open menu"
-            onClick={() => setOpen(o => !o)}
-          >
-            <span className="flex flex-col gap-[5px]">
-              <span className="block h-0.5 w-5 bg-white" />
-              <span className="block h-0.5 w-5 bg-white" />
-            </span>
-          </button>
-        </div>
-      </nav>
-    </header>
+    <>
+      <header className="sticky top-0 z-50 px-3 pt-3 sm:px-6 sm:pt-[18px]">
+        <nav className="relative mx-auto flex h-14 max-w-[1400px] items-center justify-between rounded-full bg-night pl-5 pr-2 shadow-[0_10px_30px_-15px_rgba(0,0,0,.5)] sm:h-16 sm:pl-7 sm:pr-3">
+          <Logo className="text-[19px] sm:text-[22px]" />
+
+          {/* desktop links */}
+          <ul className="absolute left-1/2 hidden -translate-x-1/2 gap-1 lg:flex">
+            {NAV.map(({ to, label }) => (
+              <li key={to}><NavLink to={to} end className={pill}>{label}</NavLink></li>
+            ))}
+          </ul>
+
+          <div className="flex items-center gap-2 lg:gap-6">
+            <a href={SITE.phoneHref} className="hidden text-[13px] text-white lg:inline">Call Us</a>
+            <Button to="/contact" variant="white" size="sm" className="hidden sm:inline-flex">Enquire Now</Button>
+            <button
+              className={`grid size-10 cursor-pointer place-items-center rounded-full transition-colors lg:hidden ${open ? 'bg-brand' : 'bg-white/[.08]'}`}
+              aria-label={open ? 'Close menu' : 'Open menu'}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              onClick={() => setOpen(o => !o)}
+            >
+              <span className="relative block h-3 w-5">
+                <span className={`absolute left-0 block h-0.5 w-5 bg-white transition duration-300 ${open ? 'top-[5px] rotate-45' : 'top-0'}`} />
+                <span className={`absolute left-0 block h-0.5 w-5 bg-white transition duration-300 ${open ? 'top-[5px] -rotate-45' : 'top-2.5'}`} />
+              </span>
+            </button>
+          </div>
+        </nav>
+      </header>
+      <MobileMenu open={open} onClose={() => setOpen(false)} />
+    </>
   );
 }
 

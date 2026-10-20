@@ -335,7 +335,7 @@ export function Dashboard() {
         <div className="ml-auto flex items-center gap-2.5">
           <span className="mr-2 size-[18px] rounded-full border-2 border-brand" />
           <span className={`size-[34px] rounded-full ${AVATAR.warm}`} />
-          <div className="hidden sm:block"><b className="block text-xs">Javed Rathore</b><small className="text-[9px] text-[#999]">Manager</small></div>
+          <div className="hidden sm:block"><b className="block text-xs">Client Desk</b><small className="text-[9px] text-[#999]">Bhaarat Sky Team</small></div>
         </div>
       </div>
 
