@@ -135,8 +135,21 @@ function Header() {
 
           <div className="flex items-center gap-2 lg:gap-6">
             <a href={SITE.phoneHref} className="hidden text-[13px] text-white lg:inline">Call Us</a>
-            <span className="hidden sm:block">
-              <Button to="/contact" variant="white" size="sm">Enquire Now</Button>
+            {/* very small phones: icon-only enquire button */}
+            <Link
+              to="/contact"
+              aria-label="Enquire Now"
+              title="Enquire Now"
+              className="grid size-10 shrink-0 place-items-center rounded-full bg-white text-ink transition hover:bg-brand hover:text-white min-[400px]:hidden"
+            >
+              <Icon name="mail" className="size-[18px]" />
+            </Link>
+            {/* wider phones and up: full button with icon */}
+            <span className="hidden min-[400px]:block">
+              <Button to="/contact" variant="white" size="sm" className="gap-2">
+                <Icon name="mail" className="size-4" />
+                Enquire Now
+              </Button>
             </span>
             <button
               className={`grid size-10 cursor-pointer place-items-center rounded-full transition-colors lg:hidden ${open ? 'bg-brand' : 'bg-white/[.08]'}`}
