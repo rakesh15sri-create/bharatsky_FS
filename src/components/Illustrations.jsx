@@ -350,11 +350,11 @@ export function Dashboard() {
         </aside>
 
         <div>
-          <div className="flex items-center gap-6 pb-3.5">
-            <div><b className="block text-sm font-semibold">Client Introductions</b><small className="text-[8px] text-[#aaa]">{dateLabel}</small></div>
-            <nav className="flex items-center gap-[18px] text-[#999]">
-              <span className="border-b-2 border-brand pb-[3px] text-brand">Board</span>
-              {['Timeline', 'Disclosures', 'Reports', 'Files'].map(t => <span key={t} className="hidden sm:inline">{t}</span>)}
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 pb-3.5 sm:justify-start">
+            <div><b className="block whitespace-nowrap text-sm font-semibold">Client Introductions</b><small className="text-[8px] text-[#aaa]">{dateLabel}</small></div>
+            <nav className="flex items-center gap-[18px] whitespace-nowrap text-[#999]">
+              <span className="hidden border-b-2 border-brand pb-[3px] text-brand sm:inline">Board</span>
+              {['Timeline', 'Disclosures', 'Reports', 'Files'].map(t => <span key={t} className="hidden md:inline">{t}</span>)}
               <span className="rounded-full bg-brand px-2.5 py-[5px] text-white">+ New Enquiry</span>
             </nav>
           </div>
