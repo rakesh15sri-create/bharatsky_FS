@@ -97,14 +97,14 @@ export default function About() {
             <CheckList items={WHY} className="mt-9" />
           </div>
           <div>
-            <Chip>Leadership</Chip>
+            <Chip>Our Team</Chip>
             <InfoCard className="mt-5">
               <Ic name="logo" tone="grey" className="text-[46px]" />
-              <CardNum>Owner &amp; Manager</CardNum>
-              <CardTitle>Javed Rathore</CardTitle>
+              <CardNum>Dubai-Based Team</CardNum>
+              <CardTitle>People Who Stay Accountable</CardTitle>
               <Small>
-                Javed leads BHAARAT SKY Financial Services L.L.C and is responsible for the company’s client relationships, provider partnerships and
-                adherence to its defined scope of activity.
+                Our team manages client relationships, provider partnerships and adherence to our defined scope of activity, and stays your point of
+                contact from first enquiry to introduction.
               </Small>
               <Button to="/contact" variant="outline" size="sm" className="self-start">Speak with our team</Button>
             </InfoCard>
