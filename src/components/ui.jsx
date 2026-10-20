@@ -69,11 +69,14 @@ export function Ic({ name, tone = 'orange', className = '' }) {
   );
 }
 
+// className controls size and visibility (e.g. "hidden md:block text-[104px]")
 export function IcPair({ className = 'text-[104px]' }) {
   return (
-    <div className={`inline-flex items-center ${className}`}>
-      <Ic name="trend" tone="grey" className="-mr-[.18em] size-[.78em]!" />
-      <Ic name="bolt" />
+    <div className={`shrink-0 ${className}`}>
+      <div className="inline-flex items-center">
+        <Ic name="trend" tone="grey" className="-mr-[.18em] size-[.78em]!" />
+        <Ic name="bolt" />
+      </div>
     </div>
   );
 }
@@ -141,7 +144,7 @@ export const CardTitle = ({ children }) => <h3 className="text-[21px] font-mediu
 export function HeroLines({ tall = false }) {
   const h = tall ? 800 : 600;
   return (
-    <svg className="absolute inset-0 z-0 size-full" viewBox={`0 0 1500 ${h}`} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <svg className="absolute inset-0 z-0 hidden size-full md:block" viewBox={`0 0 1500 ${h}`} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <g fill="none" stroke="#ececec" strokeWidth="1.2">
         <path d={`M0 420 H180 Q200 420 200 440 V${h}`} />
         <path d={`M60 0 V260 Q60 280 80 280 H250 Q270 280 270 300 V${h}`} />

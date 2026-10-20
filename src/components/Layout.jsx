@@ -22,8 +22,8 @@ const pill = ({ isActive }) =>
 
 function Logo({ className = '' }) {
   return (
-    <Link to="/" className={`inline-flex items-center gap-2.5 text-[22px] font-medium text-white ${className}`}>
-      <Icon name="logo" className="h-[21px] w-[30px] fill-white" />
+    <Link to="/" className={`inline-flex shrink-0 items-center gap-2.5 whitespace-nowrap text-[22px] font-medium text-white ${className}`}>
+      <Icon name="logo" className="h-[21px] w-[30px] shrink-0 fill-white" />
       <span>{SITE.short}</span>
     </Link>
   );
@@ -35,12 +35,14 @@ function MobileMenu({ open, onClose }) {
     <div
       id="mobile-menu"
       aria-hidden={!open}
-      className={`fixed inset-0 z-40 flex h-dvh flex-col overflow-y-auto bg-night px-6 pb-8 pt-[100px] text-white transition-[opacity,visibility] duration-300 sm:px-10 sm:pt-[120px] lg:hidden ${
+      className={`fixed inset-0 z-40 flex h-dvh flex-col overflow-x-hidden overflow-y-auto overscroll-contain bg-night px-6 pb-8 pt-[100px] text-white transition-[opacity,visibility] duration-300 sm:px-10 sm:pt-[120px] lg:hidden ${
         open ? 'visible opacity-100' : 'invisible opacity-0'
       }`}
     >
-      {/* soft brand glow */}
-      <span className="pointer-events-none absolute -right-32 -top-32 size-[420px] rounded-full bg-[radial-gradient(circle,rgba(255,90,31,.28),transparent_65%)]" />
+      {/* soft brand glow, clipped to the screen so it can never cause sideways scrolling */}
+      <span className="pointer-events-none fixed inset-0 overflow-hidden">
+        <span className="absolute -right-32 -top-32 size-[420px] rounded-full bg-[radial-gradient(circle,rgba(255,90,31,.28),transparent_65%)]" />
+      </span>
 
       <span className="relative mb-6 text-xs font-medium uppercase tracking-[.08em] text-[#8a8a8a]">Menu</span>
 
@@ -133,7 +135,9 @@ function Header() {
 
           <div className="flex items-center gap-2 lg:gap-6">
             <a href={SITE.phoneHref} className="hidden text-[13px] text-white lg:inline">Call Us</a>
-            <Button to="/contact" variant="white" size="sm" className="hidden sm:inline-flex">Enquire Now</Button>
+            <span className="hidden sm:block">
+              <Button to="/contact" variant="white" size="sm">Enquire Now</Button>
+            </span>
             <button
               className={`grid size-10 cursor-pointer place-items-center rounded-full transition-colors lg:hidden ${open ? 'bg-brand' : 'bg-white/[.08]'}`}
               aria-label={open ? 'Close menu' : 'Open menu'}
@@ -208,7 +212,7 @@ function Footer() {
 
         <div className="mt-[90px] flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
           <span className="text-[clamp(52px,9vw,124px)] font-medium leading-none tracking-[-.04em]">©{SITE.short}</span>
-          <Icon name="logo" className="h-[clamp(98px,14vw,182px)] w-[clamp(140px,20vw,260px)] fill-[#2b2b2b]" />
+          <Icon name="logo" className="hidden h-[clamp(98px,14vw,182px)] w-[clamp(140px,20vw,260px)] fill-[#2b2b2b] sm:block" />
         </div>
 
         <p className="mt-[50px] max-w-[820px] text-[11px] leading-[1.6] text-[#8a8a8a]">

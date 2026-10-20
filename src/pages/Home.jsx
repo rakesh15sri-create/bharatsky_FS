@@ -88,7 +88,7 @@ export default function Home() {
         </Container>
         <div className="mx-auto my-10 flex max-w-[1180px] items-center justify-between gap-[30px] px-4 sm:px-6 md:my-[70px]">
           <Marquee words={['Full Transparency', 'No Pressure', 'UAE-Wide Service', 'Fully Digital']} />
-          <IcPair className="hidden text-[72px] sm:inline-flex md:text-[104px]" />
+          <IcPair className="hidden text-[72px] sm:block md:text-[104px]" />
         </div>
         <Container className="flex flex-col items-start justify-between gap-[30px] md:flex-row md:items-center">
           <Small className="max-w-[470px]">
@@ -123,7 +123,7 @@ export default function Home() {
               <H1>Four Simple<br />Steps <Muted>To Start.</Muted></H1>
               <Button to="/process" size="sm" className="mt-8">See the full process</Button>
             </div>
-            <IcPair className="text-[72px] md:text-[104px]" />
+            <IcPair className="hidden text-[72px] md:block md:text-[104px]" />
           </div>
           <Reveal><Dashboard /></Reveal>
         </Container>
