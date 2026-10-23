@@ -3,6 +3,7 @@ import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import Icon from './Icons';
 import { Button, Container } from './ui';
 import { NAV, SITE } from '../data/site';
+import { SERVICES } from '../data/services';
 
 function ScrollManager() {
   const { pathname, hash } = useLocation();
@@ -134,7 +135,10 @@ function Header() {
           </ul>
 
           <div className="flex items-center gap-2 lg:gap-6">
-            <a href={SITE.phoneHref} className="hidden text-[13px] text-white lg:inline">Call Us</a>
+            <a href={`mailto:${SITE.email}`} className="hidden items-center gap-2 text-[13px] text-white transition-colors hover:text-brand xl:inline-flex">
+              <Icon name="mail" className="size-4" />
+              {SITE.email}
+            </a>
             {/* very small phones: icon-only enquire button */}
             <Link
               to="/contact"
@@ -172,8 +176,8 @@ function Header() {
 }
 
 const FOOTER_COLS = [
-  ['Company', [['About Us', '/about'], ['Our Services', '/services'], ['Our Process', '/process'], ['Contact', '/contact']]],
-  ['Services', [['Personal Banking', '/services#banking'], ['Personal & Home Finance', '/services#finance'], ['Business Banking', '/services#business'], ['Investment Accounts', '/services#investment'], ['Islamic Finance', '/services#islamic']]],
+  ['Company', [['About Us', '/about'], ['Our Services', '/services'], ['Our Process', '/process'], ['Learning Centre', '/learn'], ['Contact', '/contact']]],
+  ['Services', SERVICES.map(s => [s.name, `/services#${s.id}`])],
   ['Contact', [['Send Enquiry', '/contact'], ['Call Us', SITE.phoneHref], ['Email Us', `mailto:${SITE.email}`], ['Al Sufouh 2, Dubai', '/contact']]],
   ['Legal', [['Risk Disclosure', '/risk-disclosure'], ['Privacy Policy', '/privacy'], ['Terms & Conditions', '/terms'], ['FAQ', '/process#faq']]],
 ];

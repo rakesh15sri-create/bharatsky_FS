@@ -1,3 +1,5 @@
+import { SERVICES } from './services';
+
 export const SITE = {
   name: 'BHAARAT SKY Financial Services L.L.C',
   short: 'Bhaarat Sky',
@@ -12,15 +14,8 @@ export const NAV = [
   { to: '/about', label: 'About' },
   { to: '/services', label: 'Services' },
   { to: '/process', label: 'Process' },
+  { to: '/learn', label: 'Learn' },
   { to: '/contact', label: 'Contact' },
 ];
 
-export const SERVICE_TOPICS = [
-  'Personal Banking',
-  'Personal & Home Finance',
-  'Business Banking',
-  'Business Finance',
-  'Investment & Trading Accounts',
-  'Islamic Finance Options',
-  'Other / Not sure',
-];
+export const SERVICE_TOPICS = [...SERVICES.map(s => s.name), 'Other / Not sure'];

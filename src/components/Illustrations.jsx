@@ -128,11 +128,19 @@ export function LoopCard({ title, text, labels }) {
 /* =========================================================
    Three-column feature row
    ========================================================= */
-export function FeatureRow({ items, className = 'mt-[50px] md:mt-20' }) {
+export function FeatureRow({ items, cols = 3, className = 'mt-[50px] md:mt-20' }) {
+  const layout =
+    cols === 4
+      ? 'sm:grid-cols-2 lg:grid-cols-4 lg:gap-0'
+      : 'md:grid-cols-3 md:gap-0';
+  const cell =
+    cols === 4
+      ? 'lg:border-l lg:border-[#dcdcdc] lg:px-[28px] lg:first:border-l-0 lg:first:pl-0'
+      : 'md:border-l md:border-[#dcdcdc] md:px-[34px] md:first:border-l-0 md:first:pl-0';
   return (
-    <div className={`grid gap-[30px] md:grid-cols-3 md:gap-0 ${className}`}>
+    <div className={`grid gap-[30px] ${layout} ${className}`}>
       {items.map(([title, text]) => (
-        <div key={title} className="md:border-l md:border-[#dcdcdc] md:px-[34px] md:first:border-l-0 md:first:pl-0">
+        <div key={title} className={cell}>
           <h4 className="mb-3.5 text-[19px] font-medium tracking-[-.01em]">{title}</h4>
           <Small className="max-w-[240px]">{text}</Small>
         </div>
