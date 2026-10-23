@@ -70,7 +70,7 @@ export const SERVICES = [
     lead: 'Insurance protects what you have built. We help you understand the types of cover available and, where permitted, introduce you to licensed insurers and insurance brokers so you can compare quotes and choose with confidence.',
     tags: ['Health', 'Life', 'Motor', 'Home', 'Business'],
     listTitle: 'We can introduce you for',
-    list: ['Health and family health insurance', 'Life, critical illness and savings plans', 'Motor, home and travel cover', 'Group health and group life for employers', 'Business cover: liability, property, marine and professional indemnity'],
+    list: ['Health and family health insurance', 'Life, critical illness and savings plans', 'Motor, home, travel and personal belongings cover', 'Group health and group life for employers', 'Business cover: liability, property, marine, fleet and professional indemnity', 'Renewal reminders and guidance on the insurer’s claims process'],
   },
   {
     id: 'wealth',

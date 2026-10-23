@@ -176,7 +176,7 @@ function Header() {
 }
 
 const FOOTER_COLS = [
-  ['Company', [['About Us', '/about'], ['Our Services', '/services'], ['Our Process', '/process'], ['Learning Centre', '/learn'], ['Contact', '/contact']]],
+  ['Company', [['About Us', '/about'], ['Our Services', '/services'], ['Our Process', '/process'], ['Learning Centre', '/learn'], ['Partner With Us', '/partners'], ['Contact', '/contact']]],
   ['Services', SERVICES.map(s => [s.name, `/services#${s.id}`])],
   ['Contact', [['Send Enquiry', '/contact'], ['Call Us', SITE.phoneHref], ['Email Us', `mailto:${SITE.email}`], ['Al Sufouh 2, Dubai', '/contact']]],
   ['Legal', [['Risk Disclosure', '/risk-disclosure'], ['Privacy Policy', '/privacy'], ['Terms & Conditions', '/terms'], ['FAQ', '/process#faq']]],
