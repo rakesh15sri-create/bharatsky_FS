@@ -1,6 +1,8 @@
 import { Button, CardNum, CardTitle, CheckList, Chip, Container, Cta, H2, Ic, InfoCard, ListTitle, Muted, Panel, Small, SplitHead, PageHero, useTitle } from '../components/ui';
 import { Faq } from '../components/Illustrations';
 import { SITE } from '../data/site';
+import { PROVIDER_CHECKS } from '../data/services';
+import Icon from '../components/Icons';
 
 const STEPS = [
   ['Send Your Enquiry', 'Tell us what you are looking for and confirm that you live or operate in the UAE. No documents are needed at this stage, and sending an enquiry is free.', ['Online form, phone or email', 'No documents required yet', 'No cost and no obligation']],
@@ -29,6 +31,11 @@ const FAQS = [
   ['Which providers do you introduce clients to?', 'Only institutions regulated by a recognised financial authority. The specific provider, and its regulator, are named in your written disclosure so you can verify them independently before proceeding.'],
   ['Do I need documents to get started?', 'Not at the enquiry stage. Documents are only needed later, when the provider carries out its own verification, and we tell you in advance what it will usually ask for.'],
   ['Can you guarantee approval?', 'No. Every provider makes its own decision based on its criteria and checks. We help you understand those criteria in advance, but we cannot guarantee approval, rates or terms.'],
+  ['Which markets can I access through an introduced broker?', 'Depending on the broker and your eligibility, typically forex, gold and other metals, oil and energy, global indices and shares, often traded as CFDs. The exact product list, leverage and costs are set by the broker and shown in its terms.'],
+  ['What is the difference between MT4, MT5 and a broker app?', 'MetaTrader 4 is a long-established platform popular for forex. MetaTrader 5 is its newer multi-asset version with more markets and tools. Many brokers also offer their own mobile app. The broker you are introduced to will tell you which platforms it supports.'],
+  ['How do I get started?', `Send us an enquiry through the contact page, email us at ${SITE.email} or call ${SITE.phone}. No documents are needed at this stage, and our team will get back to you to discuss your needs.`],
+  ['Do you help with insurance?', 'Yes. We can introduce you to licensed insurers and insurance brokers for personal cover such as health, life, motor and home, and for business cover such as group health and liability. The insurer issues the policy and handles claims.'],
+  ['Do you work with high-net-worth clients and families?', 'Yes. For private clients, families and foundations we introduce regulated wealth and investment managers, and can arrange a shortlist so you can meet and compare them before deciding.'],
   ['Do you offer Islamic finance options?', 'Yes. We can introduce you to providers offering Shariah-compliant banking and financing, and swap-free investment accounts where available.'],
   ['Do I need to visit your office?', 'No. We serve clients across all seven emirates, and enquiries are handled by phone, email and online. Meetings at our Al Sufouh office are available by appointment.'],
   ['What happens if I have a problem with the provider?', 'Account servicing, complaints and disputes are handled by the provider under the rules of its regulator. We remain available to help you understand the process and who to contact.'],
@@ -116,6 +123,27 @@ export default function Process() {
                 <Small>{text}</Small>
               </InfoCard>
             ))}
+          </div>
+
+          {/* provider due diligence */}
+          <div id="due-diligence" className="mt-[90px] scroll-mt-[110px]">
+            <SplitHead chip="How We Assess Providers" title={<>Evidence Before<br />Every <Muted>Introduction.</Muted></>}>
+              <Small>
+                We Do Not Rely On A Provider’s Own Marketing. Before We Introduce Anyone, We Check Public, Verifiable Sources, And We Keep Checking
+                Afterwards.
+              </Small>
+            </SplitHead>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {PROVIDER_CHECKS.map(([title, text], i) => (
+                <InfoCard key={title} dark={i === 0} className={i === 0 ? '' : 'border-transparent'}>
+                  <span className={`grid size-11 place-items-center rounded-full ${i === 0 ? 'bg-brand text-white' : 'bg-panel text-brand'}`}>
+                    <Icon name="check" className="size-5" />
+                  </span>
+                  <CardTitle>{title}</CardTitle>
+                  <Small>{text}</Small>
+                </InfoCard>
+              ))}
+            </div>
           </div>
         </Container>
       </Panel>

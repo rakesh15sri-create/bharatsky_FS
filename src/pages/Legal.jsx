@@ -47,6 +47,8 @@ export function RiskDisclosure() {
         <li><strong>Leverage risk:</strong> leveraged or margined products, such as CFDs and forex, can magnify losses as well as gains, and you may lose all of your invested capital.</li>
         <li><strong>Liquidity risk:</strong> some products may be difficult to sell quickly or at a fair price.</li>
         <li><strong>Currency risk:</strong> exchange-rate movements can affect the value of products in foreign currencies.</li>
+        <li><strong>Digital-asset risk:</strong> crypto CFDs and other digital-asset products can be extremely volatile and are subject to evolving regulation.</li>
+        <li><strong>Insurance limits:</strong> every policy has exclusions, limits and an excess; read the policy wording before you buy.</li>
         <li><strong>Provider risk:</strong> the performance, solvency and conduct of a third-party provider are outside our control, and investor protection differs between jurisdictions.</li>
       </ul>
       <h2>4. General information only</h2>

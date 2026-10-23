@@ -1,16 +1,12 @@
 import Icon from '../components/Icons';
 import { Button, Chip, Container, Cta, H1, H2, HeroLines, Ic, IcPair, Muted, Panel, Reveal, Small, SplitHead, useTitle } from '../components/ui';
 import { Dashboard, FeatureRow, LoopCard, Marquee, MockCards, OrbitCard } from '../components/Illustrations';
+import { MarketsSection } from '../components/Trading';
 import { SITE } from '../data/site';
+import { SERVICES } from '../data/services';
 
-const SERVICES = [
-  ['Personal Banking', 'Introductions To UAE Banks For Current, Savings And Salary Accounts.'],
-  ['Personal & Home Finance', 'Personal Loans, Credit Cards And Mortgages Through Regulated Lenders.'],
-  ['Business Banking', 'Business And Corporate Account Opening For Mainland And Free-Zone Companies.'],
-  ['Business Finance', 'Working Capital, Trade Finance And SME Facilities From Regulated Institutions.'],
-  ['Investment & Trading Accounts', 'Introductions To Regulated Brokers And Investment Platforms, Where Permitted.'],
-  ['Islamic Finance Options', 'Shariah-Compliant Banking, Financing And Swap-Free Account Options.'],
-];
+const SERVICE_ITEMS = SERVICES.map(s => [s.name, s.short]);
+
 
 export default function Home() {
   useTitle();
@@ -42,11 +38,14 @@ export default function Home() {
           </div>
         </Container>
         <Container className="relative z-10 mt-[50px] flex flex-col items-center gap-3.5 text-[13px] text-copy sm:mt-[90px] sm:flex-row sm:justify-between">
-          {[['card', 'No Documents Needed To Enquire'], ['clock', 'Written Disclosure Before Any Referral']].map(([icon, text]) => (
-            <span key={text} className="inline-flex items-center gap-2.5">
-              <Icon name={icon} className="size-[30px] rounded-full bg-[#f1f1f1] p-1.5 text-[#555]" /> {text}
-            </span>
-          ))}
+          {[['card', 'No Documents Needed To Enquire'], ['mail', SITE.email, `mailto:${SITE.email}`], ['clock', 'Written Disclosure Before Any Referral']].map(([icon, text, href]) => {
+            const Tag = href ? 'a' : 'span';
+            return (
+              <Tag key={text} href={href} className={`inline-flex items-center gap-2.5 ${href ? 'font-medium transition-colors hover:text-brand' : ''}`}>
+                <Icon name={icon} className={`size-[30px] rounded-full p-1.5 ${href ? 'bg-brand text-white' : 'bg-[#f1f1f1] text-[#555]'}`} /> {text}
+              </Tag>
+            );
+          })}
         </Container>
       </section>
 
@@ -104,15 +103,18 @@ export default function Home() {
         <Container>
           <SplitHead chip="Our Services" title={<>Introductions Across<br />Every <Muted>Financial Need</Muted></>}>
             <Small>
-              Whether You Need A Bank Account, Financing, A Business Facility Or An Investment Account, We Help You Find A Suitable Regulated
+              Whether You Need A Bank Account, Financing, Insurance, A Business Facility Or An Investment Account, We Help You Find A Suitable Regulated
               Provider And Understand It Before You Commit.
             </Small>
           </SplitHead>
           <Reveal><MockCards /></Reveal>
-          <FeatureRow items={SERVICES.slice(0, 3)} />
-          <FeatureRow items={SERVICES.slice(3)} className="mt-[30px] md:mt-[50px]" />
+          <FeatureRow items={SERVICE_ITEMS.slice(0, 4)} cols={4} />
+          <FeatureRow items={SERVICE_ITEMS.slice(4)} cols={4} className="mt-[30px] lg:mt-[50px]" />
         </Container>
       </section>
+
+      {/* ============ MARKETS ============ */}
+      <MarketsSection />
 
       {/* ============ PROCESS ============ */}
       <Panel className="overflow-hidden pb-0!">

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from './Icons';
+import { SITE } from '../data/site';
 
 /* ---------- Typography ---------- */
 export const Muted = ({ children }) => <span className="text-mute">{children}</span>;
@@ -195,6 +196,13 @@ export function Cta({ title, sub, primary, secondary, meta }) {
         <Button {...primary} size="sm" />
         <Button {...secondary} variant="outline" size="sm" />
       </div>
+      <a
+        href={`mailto:${SITE.email}`}
+        className="mt-6 inline-flex items-center gap-2.5 rounded-full bg-panel px-4 py-2 text-sm text-copy transition-colors hover:bg-brand hover:text-white"
+      >
+        <Icon name="mail" className="size-4" />
+        Or email us at <span className="font-medium">{SITE.email}</span>
+      </a>
       {meta && (
         <div className="mt-7 flex flex-col items-center justify-center gap-3 text-xs text-copy sm:flex-row sm:gap-9">
           {meta.map(([icon, text]) => (

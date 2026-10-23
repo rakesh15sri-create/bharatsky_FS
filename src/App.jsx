@@ -5,6 +5,7 @@ import About from './pages/About';
 import Services from './pages/Services';
 import Process from './pages/Process';
 import Contact from './pages/Contact';
+import Learn from './pages/Learn';
 import { Privacy, RiskDisclosure, Terms } from './pages/Legal';
 import NotFound from './pages/NotFound';
 
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="about" element={<About />} />
         <Route path="services" element={<Services />} />
         <Route path="process" element={<Process />} />
+        <Route path="learn" element={<Learn />} />
         <Route path="contact" element={<Contact />} />
         <Route path="privacy" element={<Privacy />} />
         <Route path="terms" element={<Terms />} />

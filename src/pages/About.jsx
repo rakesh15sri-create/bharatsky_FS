@@ -1,4 +1,7 @@
 import { Button, CardNum, CardTitle, CheckList, Chip, Container, Cta, H2, Ic, InfoCard, Lead, Muted, Panel, Small, SplitHead, PageHero, useTitle } from '../components/ui';
+import { WHO_WE_SERVE } from '../data/services';
+import { SITE } from '../data/site';
+import Icon from '../components/Icons';
 
 const VALUES = [
   ['Transparency', 'The provider, its regulator, our role and any fees we receive are disclosed in writing before any referral.'],
@@ -85,6 +88,22 @@ export default function About() {
               </InfoCard>
             ))}
           </div>
+
+          {/* who we serve */}
+          <div className="mt-[90px]">
+            <SplitHead chip="Who We Serve" title={<>Introductions For<br />Every <Muted>Kind Of Client.</Muted></>}>
+              <Small>From A First Bank Account To Institutional Mandates, We Match Each Client With Providers Suited To Their Size, Needs And Goals.</Small>
+            </SplitHead>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {WHO_WE_SERVE.map(([title, text], i) => (
+                <InfoCard key={title} dark={i === WHO_WE_SERVE.length - 1}>
+                  <Ic name={['trend', 'card', 'bolt', 'broadcast'][i]} tone={['grey', 'yellow', 'orange', 'orange'][i]} className="text-[46px]" />
+                  <CardTitle>{title}</CardTitle>
+                  <Small>{text}</Small>
+                </InfoCard>
+              ))}
+            </div>
+          </div>
         </Container>
       </section>
 
@@ -106,6 +125,9 @@ export default function About() {
                 Our team manages client relationships, provider partnerships and adherence to our defined scope of activity, and stays your point of
                 contact from first enquiry to introduction.
               </Small>
+              <a href={`mailto:${SITE.email}`} className="inline-flex items-center gap-2 text-sm font-medium text-brand hover:underline">
+                <Icon name="mail" className="size-4" /> {SITE.email}
+              </a>
               <Button to="/contact" variant="outline" size="sm" className="self-start">Speak with our team</Button>
             </InfoCard>
           </div>
