@@ -93,6 +93,7 @@ export default function About() {
           <div className="mt-[90px]">
             <SplitHead chip="Who We Serve" title={<>Introductions For<br />Every <Muted>Kind Of Client.</Muted></>}>
               <Small>From A First Bank Account To Institutional Mandates, We Match Each Client With Providers Suited To Their Size, Needs And Goals.</Small>
+              <Button to="/partners" variant="outline" size="sm">Are you a provider? Partner with us</Button>
             </SplitHead>
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {WHO_WE_SERVE.map(([title, text], i) => (

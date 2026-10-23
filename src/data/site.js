@@ -18,4 +18,4 @@ export const NAV = [
   { to: '/contact', label: 'Contact' },
 ];
 
-export const SERVICE_TOPICS = [...SERVICES.map(s => s.name), 'Other / Not sure'];
+export const SERVICE_TOPICS = [...SERVICES.map(s => s.name), 'Provider partnership', 'Other / Not sure'];
