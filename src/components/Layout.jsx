@@ -184,6 +184,90 @@ const FOOTER_COLS = [
 
 const SOCIAL = ['linkedin', 'instagram', 'facebook', 'youtube'];
 
+// full class strings so Tailwind can see them
+const TONES = {
+  brand: { card: 'border-t-brand', icon: 'bg-brand/15 text-brand', label: 'text-brand' },
+  sun: { card: 'border-t-sun', icon: 'bg-sun/15 text-sun', label: 'text-sun' },
+  green: { card: 'border-t-emerald-400', icon: 'bg-emerald-400/15 text-emerald-400', label: 'text-emerald-400' },
+  red: { card: 'border-t-red-500', icon: 'bg-red-500/15 text-red-400', label: 'text-red-400' },
+  pink: { card: 'border-t-rose-400', icon: 'bg-rose-400/15 text-rose-300', label: 'text-rose-300' },
+  sky: { card: 'border-t-sky-400', icon: 'bg-sky-400/15 text-sky-400', label: 'text-sky-400' },
+};
+
+const DISCLOSURES = [
+  {
+    label: SITE.name,
+    icon: 'building',
+    tone: 'brand',
+    body: (
+      <>
+        A limited liability company (single owner) registered in Dubai, United Arab Emirates, and licensed by the {LICENCE.authority} under{' '}
+        <strong>Commercial Licence No. {LICENCE.number}</strong> (Commercial Register No. {LICENCE.register}; Dubai Chamber Membership No.{' '}
+        {LICENCE.chamber}) for the activity <strong>“{LICENCE.activity}”</strong>. Registered office: {SITE.address}.
+      </>
+    ),
+  },
+  {
+    label: 'Scope of licence',
+    icon: 'check',
+    tone: 'sun',
+    body: (
+      <>
+        Our licence covers <strong>introduction services only</strong>. {SITE.short} is not a bank, broker, dealer, insurer, lender or investment
+        manager. We do not accept or hold client funds, open accounts, issue policies, execute transactions or give personal investment advice.
+        Every product is provided by a third-party institution under its own licence, disclosed to you in writing before any introduction.
+      </>
+    ),
+  },
+  {
+    label: 'Licence verification',
+    icon: 'shield',
+    tone: 'green',
+    body: (
+      <>
+        You can verify our licence with the {LICENCE.authorityShort} using <strong>Licence No. {LICENCE.number}</strong>. Our licence is valid
+        until {LICENCE.validUntil}. Full details are on our <Link to="/licences-and-regulation">Licences &amp; Regulation</Link> page. Always check
+        the licence of any provider we introduce with its own regulator.
+      </>
+    ),
+  },
+  {
+    label: 'Risk warning',
+    icon: 'alert',
+    tone: 'red',
+    body: (
+      <>
+        Contracts for difference (CFDs), forex and other leveraged products are complex and carry a <strong>high risk of losing money rapidly</strong>,
+        and losses can exceed deposits. All investments can fall as well as rise. Information on this website is general, not a personal
+        recommendation. Please read our <Link to="/risk-disclosure">Risk Disclosure</Link>.
+      </>
+    ),
+  },
+  {
+    label: 'Fraud warning',
+    icon: 'cross',
+    tone: 'pink',
+    body: (
+      <>
+        We only contact you from <strong>{SITE.email}</strong> or <strong className="whitespace-nowrap">{SITE.phone}</strong>. We will <strong>never</strong> ask you to send money
+        to us, share passwords or OTPs, or pay a fee to “unlock” an account or guarantee returns. If anyone claims to represent us otherwise, do not
+        engage and report it to <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+      </>
+    ),
+  },
+  {
+    label: 'Restricted jurisdictions',
+    icon: 'globe',
+    tone: 'sky',
+    body: (
+      <>
+        Our services are intended for <strong>residents and businesses in the United Arab Emirates</strong>. Nothing on this website is an offer or
+        solicitation in any jurisdiction where it would be unlawful, or to any person to whom it would be unlawful to make such an offer.
+      </>
+    ),
+  },
+];
+
 function FooterLink({ label, to }) {
   const cls = 'mb-3 block text-xs text-mute hover:text-brand';
   return to.startsWith('/') ? <Link to={to} className={cls}>{label}</Link> : <a href={to} className={cls}>{label}</a>;
@@ -233,28 +317,16 @@ function Footer() {
         </div>
 
         {/* legal & regulatory disclosures */}
-        <div className="mt-[50px] grid gap-4 border-t border-white/10 pt-10 text-[11px] leading-[1.7] text-[#8a8a8a] [&_strong]:font-semibold [&_strong]:text-[#bdbdbd]">
-          <p>
-            <strong>{SITE.name}</strong> is a limited liability company (single owner) registered in Dubai, United Arab Emirates, and licensed by the {LICENCE.authority} under Commercial Licence No. {LICENCE.number} (Commercial Register No.{' '}
-            {LICENCE.register}; Dubai Chamber Membership No. {LICENCE.chamber}) for the activity “{LICENCE.activity}”. Registered office:{' '}
-            {SITE.address}.
-          </p>
-          <p>
-            <strong>Scope of licence:</strong> our licence covers introduction services only. {SITE.short} is not a bank, broker, dealer, insurer,
-            lender or investment manager. We do not accept or hold client funds, open accounts, issue policies, execute transactions or provide
-            personal investment advice. All financial products and services are provided by third-party institutions under their own licences,
-            terms and regulators, which are disclosed to you in writing before any introduction.
-          </p>
-          <p>
-            <strong>Risk warning:</strong> contracts for difference (CFDs), forex and other leveraged products are complex and carry a high risk of
-            losing money rapidly, and losses can exceed deposits. All investments can fall as well as rise in value. Information on this website is
-            general and educational, is not a personal recommendation and does not guarantee any outcome. Please read our{' '}
-            <Link to="/risk-disclosure" className="text-[#bdbdbd] underline hover:text-white">Risk Disclosure</Link>.
-          </p>
-          <p>
-            <strong>Restricted jurisdictions:</strong> our services are intended for residents and businesses in the United Arab Emirates. Nothing
-            on this website is an offer or solicitation in any jurisdiction where it would be unlawful.
-          </p>
+        <div className="mt-[50px] grid gap-3 border-t border-white/10 pt-10 md:grid-cols-2 lg:grid-cols-3">
+          {DISCLOSURES.map(({ label, icon, tone, body }) => (
+            <div key={label} className={`rounded-card border border-white/[.08] border-t-2 bg-white/[.03] p-5 ${TONES[tone].card}`}>
+              <div className="mb-3 flex items-center gap-2.5">
+                <span className={`grid size-8 shrink-0 place-items-center rounded-full ${TONES[tone].icon}`}><Icon name={icon} className="size-4" /></span>
+                <span className={`text-[11px] font-semibold uppercase tracking-[0.12em] ${TONES[tone].label}`}>{label}</span>
+              </div>
+              <p className="text-xs leading-[1.7] text-[#9a9a9a] [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-white [&_strong]:font-medium [&_strong]:text-[#d8d8d8]">{body}</p>
+            </div>
+          ))}
         </div>
 
         <div className="mt-10 flex flex-col gap-5 border-t border-white/10 pt-6 text-[11px] text-[#8a8a8a] lg:flex-row lg:items-center lg:justify-between">
@@ -270,6 +342,44 @@ function Footer() {
   );
 }
 
+// floating contact + back-to-top buttons, bottom right
+function FloatingActions() {
+  const [showTop, setShowTop] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 500);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return (
+    <div className="fixed bottom-4 right-4 z-30 flex flex-col items-end gap-2.5 sm:bottom-6 sm:right-6">
+      <button
+        type="button"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        aria-label="Back to top"
+        title="Back to top"
+        className={`grid size-11 cursor-pointer place-items-center rounded-full border border-line bg-white text-ink shadow-[0_8px_24px_-8px_rgba(0,0,0,.35)] transition duration-300 hover:-translate-y-0.5 hover:border-ink hover:bg-ink hover:text-white ${
+          showTop ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
+        }`}
+      >
+        <Icon name="arrowUp" className="size-[18px]" />
+      </button>
+      <Link
+        to="/contact"
+        aria-label="Contact us"
+        className="group flex h-14 items-center gap-2 rounded-full bg-brand pl-4 pr-4 text-white shadow-[0_10px_30px_-8px_rgba(255,90,31,.7)] transition duration-300 hover:-translate-y-0.5 hover:bg-brand-dark sm:pr-5"
+      >
+        <span className="relative grid size-6 place-items-center">
+          <span className="absolute inset-0 animate-ping rounded-full bg-white/30" />
+          <Icon name="chat" className="relative size-6" />
+        </span>
+        <span className="hidden text-sm font-medium sm:inline">Contact us</span>
+      </Link>
+    </div>
+  );
+}
+
 export default function Layout() {
   return (
     <>
@@ -277,6 +387,7 @@ export default function Layout() {
       <Header />
       <main><Outlet /></main>
       <Footer />
+      <FloatingActions />
     </>
   );
 }

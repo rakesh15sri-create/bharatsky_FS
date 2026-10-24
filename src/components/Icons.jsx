@@ -49,6 +49,37 @@ const PATHS = {
       <circle cx="12" cy="9.5" r="2.5" {...stroke} strokeWidth="1.7" />
     </>
   ),
+  building: (
+    <>
+      <path d="M4 21V5l8-2v18M12 8l8 2.5V21M2.5 21h19" {...stroke} strokeWidth="1.7" />
+      <path d="M7.5 8.5v.01M7.5 12v.01M7.5 15.5v.01M16 13v.01M16 16.5v.01" {...stroke} strokeWidth="2.4" />
+    </>
+  ),
+  shield: (
+    <>
+      <path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.4-7.5 9.5-4.3-1.1-7.5-4.9-7.5-9.5V6L12 3z" {...stroke} strokeWidth="1.7" />
+      <path d="M8.8 12.2l2.2 2.2 4.3-4.4" {...stroke} strokeWidth="1.9" />
+    </>
+  ),
+  alert: (
+    <>
+      <path d="M12 3.5l9.5 16.5h-19L12 3.5z" {...stroke} strokeWidth="1.7" />
+      <path d="M12 10v4.2M12 17.2v.01" {...stroke} strokeWidth="2.2" />
+    </>
+  ),
+  globe: (
+    <>
+      <circle cx="12" cy="12" r="9" {...stroke} strokeWidth="1.7" />
+      <path d="M3 12h18M12 3c2.5 2.6 3.7 5.6 3.7 9s-1.2 6.4-3.7 9c-2.5-2.6-3.7-5.6-3.7-9S9.5 5.6 12 3z" {...stroke} strokeWidth="1.7" />
+    </>
+  ),
+  arrowUp: <path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" {...stroke} strokeWidth="2.2" />,
+  chat: (
+    <>
+      <path d="M20 11.5a7.5 7.5 0 0 1-11 6.6L4 19.5l1.4-4.6A7.5 7.5 0 1 1 20 11.5z" {...stroke} strokeWidth="1.8" />
+      <path d="M8.5 11.5v.01M12 11.5v.01M15.5 11.5v.01" {...stroke} strokeWidth="2.6" />
+    </>
+  ),
   linkedin: <path fill="currentColor" d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1.5 7v8h2.7v-8H5.5zm1.3-4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM10 10v8h2.7v-4.2c0-1.1.4-1.9 1.5-1.9s1.3.9 1.3 2V18h2.7v-4.7c0-2.5-1.3-3.5-3.1-3.5a2.8 2.8 0 0 0-2.4 1.3V10H10z" />,
   instagram: <path fill="currentColor" d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm5 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm5-3.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />,
   facebook: <path fill="currentColor" d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-5v-7h2.4l.4-2.8H15V9.4c0-.8.3-1.4 1.4-1.4H18V5.5a19 19 0 0 0-2.3-.1c-2.3 0-3.7 1.4-3.7 3.9v1.9H9.6V14H12v7H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" />,
