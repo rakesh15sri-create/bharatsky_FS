@@ -228,7 +228,7 @@ function Footer() {
         </div>
 
         <div className="mt-[90px] flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
-          <span className="text-[clamp(52px,9vw,124px)] font-medium leading-none tracking-[-.04em]">©{SITE.short}</span>
+          <span className="whitespace-nowrap text-[clamp(34px,11vw,108px)] font-medium uppercase leading-none sm:text-[clamp(52px,8vw,108px)] tracking-[-.04em]">©{SITE.short}</span>
           <Icon name="logo" className="hidden h-[clamp(98px,14vw,182px)] w-[clamp(140px,20vw,260px)] fill-[#2b2b2b] sm:block" />
         </div>
 
