@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import Icon from './Icons';
 import { Button, Container } from './ui';
-import { NAV, SITE } from '../data/site';
+import { LEGAL_LINKS, LICENCE, NAV, SITE } from '../data/site';
 import { SERVICES } from '../data/services';
 
 function ScrollManager() {
@@ -179,7 +179,7 @@ const FOOTER_COLS = [
   ['Company', [['About Us', '/about'], ['Our Services', '/services'], ['Our Process', '/process'], ['Learning Centre', '/learn'], ['Partner With Us', '/partners'], ['Contact', '/contact']]],
   ['Services', SERVICES.map(s => [s.name, `/services#${s.id}`])],
   ['Contact', [['Send Enquiry', '/contact'], ['Call Us', SITE.phoneHref], ['Email Us', `mailto:${SITE.email}`], ['Al Sufouh 2, Dubai', '/contact']]],
-  ['Legal', [['Risk Disclosure', '/risk-disclosure'], ['Privacy Policy', '/privacy'], ['Terms & Conditions', '/terms'], ['FAQ', '/process#faq']]],
+  ['Legal', LEGAL_LINKS],
 ];
 
 const SOCIAL = ['linkedin', 'instagram', 'facebook', 'youtube'];
@@ -232,19 +232,38 @@ function Footer() {
           <Icon name="logo" className="hidden h-[clamp(98px,14vw,182px)] w-[clamp(140px,20vw,260px)] fill-[#2b2b2b] sm:block" />
         </div>
 
-        <p className="mt-[50px] max-w-[820px] text-[11px] leading-[1.6] text-[#8a8a8a]">
-          <strong>Important disclosure:</strong> {SITE.name} acts solely as an introducer, connecting clients to financial services provided by
-          third-party regulated institutions. We are not a bank, broker or lender; we do not execute transactions, manage portfolios or accept
-          client funds. Accounts and capital remain directly with the selected licensed provider, subject to its terms and approval. Information on
-          this website is general and educational and is not a personal recommendation. No financial outcome is guaranteed.
-        </p>
+        {/* legal & regulatory disclosures */}
+        <div className="mt-[50px] grid gap-4 border-t border-white/10 pt-10 text-[11px] leading-[1.7] text-[#8a8a8a] [&_strong]:font-semibold [&_strong]:text-[#bdbdbd]">
+          <p>
+            <strong>{SITE.name}</strong> is a limited liability company (single owner) registered in Dubai, United Arab Emirates, and licensed by the {LICENCE.authority} under Commercial Licence No. {LICENCE.number} (Commercial Register No.{' '}
+            {LICENCE.register}; Dubai Chamber Membership No. {LICENCE.chamber}) for the activity “{LICENCE.activity}”. Registered office:{' '}
+            {SITE.address}.
+          </p>
+          <p>
+            <strong>Scope of licence:</strong> our licence covers introduction services only. {SITE.short} is not a bank, broker, dealer, insurer,
+            lender or investment manager. We do not accept or hold client funds, open accounts, issue policies, execute transactions or provide
+            personal investment advice. All financial products and services are provided by third-party institutions under their own licences,
+            terms and regulators, which are disclosed to you in writing before any introduction.
+          </p>
+          <p>
+            <strong>Risk warning:</strong> contracts for difference (CFDs), forex and other leveraged products are complex and carry a high risk of
+            losing money rapidly, and losses can exceed deposits. All investments can fall as well as rise in value. Information on this website is
+            general and educational, is not a personal recommendation and does not guarantee any outcome. Please read our{' '}
+            <Link to="/risk-disclosure" className="text-[#bdbdbd] underline hover:text-white">Risk Disclosure</Link>.
+          </p>
+          <p>
+            <strong>Restricted jurisdictions:</strong> our services are intended for residents and businesses in the United Arab Emirates. Nothing
+            on this website is an offer or solicitation in any jurisdiction where it would be unlawful.
+          </p>
+        </div>
 
-        <div className="mt-[70px] flex flex-wrap justify-between gap-5 text-[11px] text-[#8a8a8a]">
-          <span>© Copyright {new Date().getFullYear()}, {SITE.name}. All Rights Reserved</span>
-          <span className="flex gap-6">
-            <Link to="/terms" className="hover:text-white">Terms &amp; Conditions</Link>
-            <Link to="/privacy" className="hover:text-white">Privacy Policy</Link>
-          </span>
+        <div className="mt-10 flex flex-col gap-5 border-t border-white/10 pt-6 text-[11px] text-[#8a8a8a] lg:flex-row lg:items-center lg:justify-between">
+          <span>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</span>
+          <nav className="flex flex-wrap gap-x-5 gap-y-2">
+            {LEGAL_LINKS.map(([label, to]) => (
+              <Link key={to} to={to} className="hover:text-white">{label}</Link>
+            ))}
+          </nav>
         </div>
       </Container>
     </footer>

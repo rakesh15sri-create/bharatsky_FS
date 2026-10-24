@@ -7,7 +7,7 @@ import Process from './pages/Process';
 import Contact from './pages/Contact';
 import Learn from './pages/Learn';
 import Partners from './pages/Partners';
-import { Privacy, RiskDisclosure, Terms } from './pages/Legal';
+import { AmlPolicy, Complaints, CookiePolicy, Licences, Privacy, RiskDisclosure, Terms } from './pages/Legal';
 import NotFound from './pages/NotFound';
 
 export default function App() {
@@ -24,6 +24,10 @@ export default function App() {
         <Route path="privacy" element={<Privacy />} />
         <Route path="terms" element={<Terms />} />
         <Route path="risk-disclosure" element={<RiskDisclosure />} />
+        <Route path="licences-and-regulation" element={<Licences />} />
+        <Route path="cookie-policy" element={<CookiePolicy />} />
+        <Route path="complaints" element={<Complaints />} />
+        <Route path="aml-policy" element={<AmlPolicy />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

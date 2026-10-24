@@ -1,18 +1,27 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Container, Muted, Panel, PageHero, useTitle } from '../components/ui';
-import { SITE } from '../data/site';
+import { LEGAL_LINKS, LICENCE, SITE } from '../data/site';
 
-const UPDATED = '20 October 2026';
+const UPDATED = '24 October 2026';
 
-/* Shared wrapper: hero + readable prose column */
+/* Shared wrapper: hero + readable prose column + links to the other legal documents */
 function LegalPage({ title, first, second, children }) {
   useTitle(title);
+  const { pathname } = useLocation();
   return (
     <>
       <PageHero crumb={title} chip="Legal" lines={false} title={<>{first} <Muted>{second}</Muted></>} sub={`Last updated: ${UPDATED}`} />
       <Panel>
         <Container className="max-w-[820px] [&_a]:text-brand [&_a]:underline [&_h2]:mb-3.5 [&_h2]:mt-[50px] [&_h2]:text-[26px] [&_h2]:font-medium [&_h2]:tracking-[-.015em] [&_h2:first-child]:mt-0 [&_li]:text-[15px] [&_li]:leading-[1.75] [&_li]:text-copy [&_p]:text-[15px] [&_p]:leading-[1.75] [&_p]:text-copy [&_p+p]:mt-3 [&_ul]:my-3 [&_ul]:grid [&_ul]:list-disc [&_ul]:gap-1.5 [&_ul]:pl-[22px]">
           {children}
+          <nav className="mt-[60px] rounded-card bg-white p-6 [&_a]:no-underline">
+            <p className="mb-3 text-[13px]! font-semibold uppercase tracking-[.06em] text-grey!">Other legal documents</p>
+            <div className="flex flex-wrap gap-2">
+              {LEGAL_LINKS.filter(([, to]) => to !== pathname).map(([label, to]) => (
+                <Link key={to} to={to} className="rounded-full bg-panel px-3.5 py-2 text-[13px] text-ink! hover:bg-brand hover:text-white!">{label}</Link>
+              ))}
+            </div>
+          </nav>
         </Container>
       </Panel>
     </>
@@ -21,14 +30,209 @@ function LegalPage({ title, first, second, children }) {
 
 const Mail = () => <a href={`mailto:${SITE.email}`}>{SITE.email}</a>;
 
+/* The standard statement of who we are and what our licence covers */
+function LicenceStatement() {
+  return (
+    <p>
+      {SITE.name} (“Bhaarat Sky”, “we”, “us”) is a limited liability company (single owner) registered in Dubai, United Arab Emirates. We are
+      licensed by the {LICENCE.authority} under Commercial Licence No. {LICENCE.number} (Commercial Register No. {LICENCE.register}) for the
+      activity “{LICENCE.activity}”. Our registered office is at {SITE.address}.
+    </p>
+  );
+}
+
+/* ---------------------------------------------------------
+   Licences & Regulation
+   --------------------------------------------------------- */
+const LICENCE_ROWS = [
+  ['Legal name', SITE.name],
+  ['Licensed activity', LICENCE.activity],
+  ['Issuing authority', LICENCE.authority],
+  ['Commercial licence no.', LICENCE.number],
+  ['Commercial register no.', LICENCE.register],
+  ['Dubai Chamber membership no.', LICENCE.chamber],
+  ['Legal form', LICENCE.legalForm],
+  ['Paid-up capital', LICENCE.capital],
+  ['Issue date', LICENCE.issued],
+  ['Valid until', `${LICENCE.validUntil} (renewed annually)`],
+  ['Registered office', SITE.address],
+];
+
+export function Licences() {
+  return (
+    <LegalPage title="Licences & Regulation" first="Licences &" second="Regulation.">
+      <h2>1. Our licence</h2>
+      <LicenceStatement />
+      <dl className="mt-6 overflow-hidden rounded-card border border-line bg-white">
+        {LICENCE_ROWS.map(([k, v]) => (
+          <div key={k} className="grid gap-1 border-t border-line px-5 py-4 text-[15px] first:border-t-0 sm:grid-cols-[230px_1fr] sm:gap-5 sm:px-7">
+            <dt className="text-grey">{k}</dt>
+            <dd className="font-medium">{v}</dd>
+          </div>
+        ))}
+      </dl>
+      <p className="mt-4">
+        The authenticity of our commercial licence can be verified with the Department of Economy and Tourism, Dubai, using the QR code on the
+        official licence document. A copy is available on request at <Mail />.
+      </p>
+
+      <h2>2. What our licence covers</h2>
+      <p>Our licence permits us to introduce clients to financial services. In practice, this means we:</p>
+      <ul>
+        <li>discuss your needs and provide general information about types of financial products and providers;</li>
+        <li>check basic eligibility and give you a written disclosure before any introduction;</li>
+        <li>introduce you, with your consent, to third-party institutions that hold their own licences.</li>
+      </ul>
+
+      <h2>3. What our licence does not cover</h2>
+      <p>
+        We are not licensed as, and do not act as, a bank, finance company, broker, dealer, insurer, insurance broker, investment manager or
+        investment adviser. We therefore do not:
+      </p>
+      <ul>
+        <li>accept, hold, transfer or manage client money or assets;</li>
+        <li>open accounts, approve credit, issue insurance policies or execute trades;</li>
+        <li>give personal investment, tax or legal advice, or manage portfolios;</li>
+        <li>guarantee approvals, rates, returns or any other outcome.</li>
+      </ul>
+
+      <h2>4. Regulation of the providers we introduce</h2>
+      <p>
+        Every product or service you receive after an introduction is provided by a third-party institution under its own licence and the rules of
+        its own regulator. Depending on the provider, this may be:
+      </p>
+      <ul>
+        <li><strong>Central Bank of the UAE (CBUAE):</strong> banks, finance companies, exchange houses and insurers.</li>
+        <li><strong>Capital Market Authority (formerly the Securities and Commodities Authority):</strong> securities, commodities and investment firms at the federal level.</li>
+        <li><strong>Dubai Financial Services Authority (DFSA):</strong> firms in the Dubai International Financial Centre.</li>
+        <li><strong>Financial Services Regulatory Authority (FSRA):</strong> firms in Abu Dhabi Global Market.</li>
+        <li><strong>Overseas regulators:</strong> where a provider is regulated outside the UAE, this is stated in your written disclosure, together with the differences in investor protection.</li>
+      </ul>
+      <p>
+        Your written disclosure always names the provider, its regulator and its licence number so you can verify them in the regulator’s public
+        register before you proceed.
+      </p>
+
+      <h2>5. Client money</h2>
+      <p>
+        We never receive client funds. Deposits, repayments, premiums and withdrawals take place only between you and the provider, and only from
+        and to accounts in your own name. If anyone asks you to pay money to {SITE.short} for a financial product, do not pay, and contact us at{' '}
+        <Mail />.
+      </p>
+
+      <h2>6. Questions</h2>
+      <p>For any question about our licence or regulatory status, email <Mail /> or call <a href={SITE.phoneHref}>{SITE.phone}</a>.</p>
+    </LegalPage>
+  );
+}
+
+/* ---------------------------------------------------------
+   Cookie Policy
+   --------------------------------------------------------- */
+export function CookiePolicy() {
+  return (
+    <LegalPage title="Cookie Policy" first="Cookie" second="Policy.">
+      <h2>1. What cookies are</h2>
+      <p>
+        Cookies are small text files placed on your device when you visit a website. Similar technologies include local storage and embedded
+        content from third parties. This policy explains how the {SITE.short} website uses them.
+      </p>
+      <h2>2. Cookies we use</h2>
+      <ul>
+        <li><strong>Strictly necessary:</strong> technologies needed for the website to load and work correctly. These cannot be switched off.</li>
+        <li><strong>Third-party content:</strong> our website loads fonts from Google Fonts and an embedded map from Google Maps on the Contact page. These services may set their own cookies or collect technical data, under their own privacy policies.</li>
+      </ul>
+      <p>We do not currently use advertising cookies. If we introduce analytics or marketing cookies in future, we will update this policy and, where required, ask for your consent first.</p>
+      <h2>3. Managing cookies</h2>
+      <p>
+        You can block or delete cookies through your browser settings. Blocking strictly necessary technologies may stop parts of the website from
+        working properly.
+      </p>
+      <h2>4. Contact</h2>
+      <p>For questions about this policy, email <Mail />. See also our <Link to="/privacy">Privacy Policy</Link>.</p>
+    </LegalPage>
+  );
+}
+
+/* ---------------------------------------------------------
+   Complaints Policy
+   --------------------------------------------------------- */
+export function Complaints() {
+  return (
+    <LegalPage title="Complaints Policy" first="Complaints" second="Policy.">
+      <h2>1. Our commitment</h2>
+      <p>
+        We want every client to be treated fairly. If you are unhappy with our service, please tell us so that we can put it right. Complaints
+        are handled promptly, fairly and free of charge.
+      </p>
+      <h2>2. Complaints about our introduction service</h2>
+      <p>This covers matters within our control, such as the information we gave you, our written disclosure or how our team treated you.</p>
+      <ul>
+        <li><strong>How to complain:</strong> email <Mail /> with the subject “Complaint”, or call <a href={SITE.phoneHref}>{SITE.phone}</a>. Please include your name, contact details, what happened and what outcome you would like.</li>
+        <li><strong>Acknowledgement:</strong> we aim to acknowledge your complaint within 2 business days.</li>
+        <li><strong>Response:</strong> we aim to send a full written response within 15 business days. If we need more time, we will tell you why and when to expect our answer.</li>
+      </ul>
+      <h2>3. Complaints about a provider</h2>
+      <p>
+        Accounts, loans, policies, claims, trades, deposits and withdrawals are the responsibility of the provider you were introduced to. Please
+        raise these complaints directly with the provider, using its complaints process. Each provider must handle complaints under the rules of
+        its own regulator, and you may be able to escalate to that regulator or its dispute-resolution body. We will gladly help you understand who
+        to contact.
+      </p>
+      <h2>4. If you are not satisfied</h2>
+      <p>
+        If you are not satisfied with our final response, you may contact the Department of Economy and Tourism, Dubai, which issued our licence,
+        including through its consumer-protection channels at{' '}
+        <a href="https://www.consumerrights.ae" target="_blank" rel="noreferrer">www.consumerrights.ae</a>.
+      </p>
+    </LegalPage>
+  );
+}
+
+/* ---------------------------------------------------------
+   AML & KYC Policy
+   --------------------------------------------------------- */
+export function AmlPolicy() {
+  return (
+    <LegalPage title="AML & KYC Policy" first="AML & KYC" second="Policy.">
+      <h2>1. Our commitment</h2>
+      <p>
+        {SITE.name} is committed to preventing money laundering, terrorist financing and sanctions evasion. We follow applicable UAE law,
+        including Federal Decree-Law No. 20 of 2018 on Anti-Money Laundering and Combating the Financing of Terrorism (as amended), and related
+        regulations and guidance.
+      </p>
+      <h2>2. Our role as an introducer</h2>
+      <p>
+        We do not hold client money, so most customer due diligence is carried out by the regulated provider you are introduced to. Each provider
+        performs its own identity verification, source-of-funds checks and ongoing monitoring before and after opening an account.
+      </p>
+      <h2>3. What we do</h2>
+      <ul>
+        <li>Collect basic identity and contact information before making an introduction.</li>
+        <li>Screen clients and providers against applicable sanctions lists.</li>
+        <li>Refuse or stop an introduction where information is false, incomplete or raises concerns.</li>
+        <li>Report suspicious activity to the UAE Financial Intelligence Unit where the law requires.</li>
+        <li>Keep records of introductions for the periods required by law.</li>
+        <li>Train our team to recognise and escalate warning signs.</li>
+      </ul>
+      <h2>4. What we ask of you</h2>
+      <ul>
+        <li>Provide accurate, complete and up-to-date information.</li>
+        <li>Use only accounts and payment methods in your own name with any provider.</li>
+        <li>Never ask us, or anyone claiming to represent us, to receive or transfer money on your behalf.</li>
+      </ul>
+      <h2>5. Contact</h2>
+      <p>Questions about this policy can be sent to <Mail />.</p>
+    </LegalPage>
+  );
+}
+
 export function RiskDisclosure() {
   return (
     <LegalPage title="Risk Disclosure" first="Risk" second="Disclosure.">
       <h2>1. Our role</h2>
-      <p>
-        {SITE.name} (“Bhaarat Sky”, “we”, “us”) is a Dubai-based company that introduces clients to financial services. We provide general
-        information and may introduce eligible clients to third-party regulated providers.
-      </p>
+      <LicenceStatement />
+      <p>We provide general information and may introduce eligible clients to third-party regulated providers.</p>
       <p>
         We are not a bank, broker, lender or custodian. We do not accept, hold or transfer client funds or assets, open accounts on your behalf or
         execute transactions. Any account you open, and any product you use, is provided by the relevant third-party provider under its own terms,
@@ -77,9 +281,10 @@ export function Privacy() {
     <LegalPage title="Privacy Policy" first="Privacy" second="Policy.">
       <h2>1. Who we are</h2>
       <p>
-        This policy explains how {SITE.name} (“Bhaarat Sky”, “we”, “us”), {SITE.address}, handles personal information. We aim to process
-        personal data in line with applicable UAE law, including Federal Decree-Law No. 45 of 2021 on the Protection of Personal Data.
+        This policy explains how we handle personal information. We aim to process personal data in line with applicable UAE law, including
+        Federal Decree-Law No. 45 of 2021 on the Protection of Personal Data.
       </p>
+      <LicenceStatement />
       <h2>2. Information we collect</h2>
       <ul>
         <li><strong>Information you provide:</strong> your name, email address, phone number, the type of client you are, and the details of your enquiry.</li>
@@ -127,13 +332,14 @@ export function Terms() {
     <LegalPage title="Terms & Conditions" first="Terms &" second="Conditions.">
       <h2>1. About these terms</h2>
       <p>
-        These terms govern your use of this website and any enquiry you make through it. The website is operated by {SITE.name}, a limited
-        liability company registered in Dubai, United Arab Emirates. By using the website, you agree to these terms.
+        These terms govern your use of this website and any enquiry you make through it. By using the website, you agree to these terms.
       </p>
+      <LicenceStatement />
       <h2>2. Our services</h2>
       <p>
-        We act solely as an introducer. Our services consist of understanding your needs, checking your eligibility, providing a written
-        disclosure and, where appropriate, introducing you to a third-party regulated provider.
+        In line with our licence, we act solely as an introducer. Our services consist of understanding your needs, checking your eligibility,
+        providing a written disclosure and, where appropriate, introducing you to a third-party regulated provider. See{' '}
+        <Link to="/licences-and-regulation">Licences &amp; Regulation</Link> for exactly what our licence does and does not cover.
       </p>
       <p>
         We do not accept client funds, open accounts, approve applications or execute transactions. Any agreement for a financial product is made
@@ -166,12 +372,20 @@ export function Terms() {
         To the extent permitted by law, we are not liable for any loss arising from your use of this website or from decisions you make based on
         its general content, or from the products, services or conduct of any third-party provider.
       </p>
-      <h2>8. Governing law</h2>
+      <h2>8. Eligibility and restricted jurisdictions</h2>
+      <p>
+        Our services are intended for individuals aged 18 or over and for businesses resident or established in the United Arab Emirates. Nothing
+        on this website is an offer, solicitation or recommendation in any jurisdiction where it would be unlawful. Providers we introduce may
+        apply their own restrictions on residence and nationality.
+      </p>
+      <h2>9. Complaints</h2>
+      <p>If you are unhappy with our service, please follow our <Link to="/complaints">Complaints Policy</Link>.</p>
+      <h2>10. Governing law</h2>
       <p>
         These terms are governed by the laws of the Emirate of Dubai and the federal laws of the United Arab Emirates. Any dispute will be subject
         to the jurisdiction of the courts of Dubai.
       </p>
-      <h2>9. Changes and contact</h2>
+      <h2>11. Changes and contact</h2>
       <p>We may update these terms from time to time. For questions, please <Link to="/contact">contact us</Link> or email <Mail />.</p>
     </LegalPage>
   );
