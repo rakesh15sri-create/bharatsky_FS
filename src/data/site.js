@@ -32,7 +32,7 @@ export const LEGAL_LINKS = [
   ['Privacy Policy', '/privacy'],
   ['Cookie Policy', '/cookie-policy'],
   ['Complaints Policy', '/complaints'],
-  ['AML & KYC Policy', '/aml-policy'],
+  ['AML & CFT Policy', '/aml-policy'],
 ];
 
 export const NAV = [
