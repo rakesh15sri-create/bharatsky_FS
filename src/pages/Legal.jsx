@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Container, Muted, Panel, PageHero, useTitle } from '../components/ui';
 import { LEGAL_LINKS, LICENCE, SITE } from '../data/site';
 
-const UPDATED = '24 October 2026';
+const UPDATED = '26 October 2026';
 
 /* Shared wrapper: hero + readable prose column + links to the other legal documents */
 function LegalPage({ title, first, second, children }) {
@@ -120,7 +120,69 @@ export function Licences() {
         <Mail />.
       </p>
 
-      <h2>6. Questions</h2>
+      <h2>6. How we are paid</h2>
+      <p>
+        We receive referral fees only from the licensed and regulated institutions to which clients are successfully introduced. We never receive,
+        hold or process client funds or assets. Where a referral fee applies to your introduction, it is set out in your written disclosure.
+      </p>
+
+      <h2>7. Staff remuneration and conflicts of interest</h2>
+      <p>
+        Our Rewards Program sets out how our team is assessed and rewarded. It is designed so that pay never encourages staff to put volume ahead
+        of your interests:
+      </p>
+      <ul>
+        <li>Performance is assessed once a year on two equally weighted dimensions: <strong>results</strong> against role objectives and <strong>behaviours</strong>, including compliance with our policies, fair treatment of clients and professional conduct.</li>
+        <li>Staff involved in introductions have targets that include conduct and quality measures, not volume or revenue alone.</li>
+        <li>Before any bonus or incentive is paid, our Compliance Officer confirms in writing that it does not create a regulatory conflict or conduct risk.</li>
+        <li>Discretionary awards require documented grounds, sign-off by both the line manager and senior management, and a compliance review.</li>
+        <li>Incentive structures are reviewed every year against our regulatory obligations, risk appetite and duties to clients.</li>
+      </ul>
+
+      <h2>8. Governance</h2>
+      <p>
+        Our governance arrangements are set out in our Governance Manual and are proportionate to the size and nature of our business. As we are
+        in our initial phase of operations, we do not yet have a Board of Directors. Governance is exercised by the Head of Category and the
+        Shareholder, with documented accountability and escalation. A Board, with an appropriate balance of executive and non-executive directors
+        and supporting committees, will be appointed as the business grows, and we will notify the regulator of any appointments.
+      </p>
+      <ul>
+        <li><strong>Head of Category:</strong> responsible for the overall management of our introduction activity, our business plan, clear reporting lines and segregation of duties, and a culture of compliance and integrity. Material matters are escalated to the Shareholder.</li>
+        <li><strong>Head of Compliance and Money Laundering Reporting Officer:</strong> ordinarily resident in the UAE, with unrestricted access to senior management, the Shareholder and all company records. This role maintains our compliance, AML and financial-crime policies, monitors compliance with applicable rules, trains staff, handles regulatory reporting and manages reporting to the UAE Financial Intelligence Unit. It reports to the Head of Category, with the right to escalate to the Shareholder and the regulator.</li>
+        <li><strong>Internal audit:</strong> independent reviews of our controls, governance and compliance framework, which may be outsourced to an accredited firm. Findings are reported to senior management.</li>
+        <li><strong>Remuneration:</strong> overseen by the Head of Category, subject to Shareholder oversight, and designed so that it never rewards misconduct or regulatory breaches.</li>
+      </ul>
+      <p>
+        See also our <Link to="/aml-policy">AML &amp; CFT Policy</Link> and the risk-management section of our{' '}
+        <Link to="/risk-disclosure">Risk Disclosure</Link>.
+      </p>
+
+      <h2>9. Our code of conduct</h2>
+      <p>
+        Everyone who works for us, including employees, consultants, interns and outsourced staff, is bound by our Code of Conduct. In particular,
+        our team must:
+      </p>
+      <ul>
+        <li>never give personalised investment recommendations, suitability assessments or investment advice. These are provided only by the licensed institutions we introduce you to;</li>
+        <li>never suggest that we execute transactions, hold client assets, or provide custody or portfolio management services;</li>
+        <li>communicate clearly, accurately and promptly, and never misrepresent or leave out material facts;</li>
+        <li>keep your information confidential and share it only with your consent or where the law requires;</li>
+        <li>declare any conflict of interest to the Head of Compliance, who decides how it is managed;</li>
+        <li>treat every client with respect and without discrimination;</li>
+        <li>complete the training and qualifications required for their role, including regular AML, compliance and data-protection training;</li>
+        <li>only publish marketing or informational content that has been approved by the Head of Compliance.</li>
+      </ul>
+      <p>
+        Our staff may not promote financial products or investment opportunities on our behalf through personal or unofficial social-media
+        accounts. If someone contacts you this way claiming to represent {SITE.short}, please treat it with caution and verify by emailing{' '}
+        <Mail />.
+      </p>
+      <p>
+        Staff must report any breach of the code, the law or our policies to our compliance team, and may do so confidentially. Anyone who reports
+        a concern in good faith is protected.
+      </p>
+
+      <h2>10. Questions</h2>
       <p>For any question about our licence or regulatory status, email <Mail /> or call <a href={SITE.phoneHref}>{SITE.phone}</a>.</p>
     </LegalPage>
   );
@@ -162,67 +224,274 @@ export function Complaints() {
     <LegalPage title="Complaints Policy" first="Complaints" second="Policy.">
       <h2>1. Our commitment</h2>
       <p>
-        We want every client to be treated fairly. If you are unhappy with our service, please tell us so that we can put it right. Complaints
-        are handled promptly, fairly and free of charge.
+        We want every client to be treated fairly. You have the right to complain, and we are committed to resolving every complaint promptly,
+        fairly, transparently and free of charge. Complaints are handled by our Head of Compliance, who is independent of the team that served
+        you.
       </p>
-      <h2>2. Complaints about our introduction service</h2>
-      <p>This covers matters within our control, such as the information we gave you, our written disclosure or how our team treated you.</p>
+
+      <h2>2. What counts as a complaint</h2>
+      <p>
+        A complaint is any expression of dissatisfaction, made verbally, in writing or electronically, about our service or how you were treated.
+        Examples include:
+      </p>
       <ul>
-        <li><strong>How to complain:</strong> email <Mail /> with the subject “Complaint”, or call <a href={SITE.phoneHref}>{SITE.phone}</a>. Please include your name, contact details, what happened and what outcome you would like.</li>
-        <li><strong>Acknowledgement:</strong> we aim to acknowledge your complaint within 2 business days.</li>
-        <li><strong>Response:</strong> we aim to send a full written response within 15 business days. If we need more time, we will tell you why and when to expect our answer.</li>
+        <li>we gave you inadequate or inaccurate information or disclosure;</li>
+        <li>negligence or delay on our part that caused you a financial loss;</li>
+        <li>we did not meet the client-protection standards or code of conduct we must follow;</li>
+        <li>we shared your confidential information without your consent or a legal requirement.</li>
       </ul>
-      <h2>3. Complaints about a provider</h2>
+      <p>
+        Matters that do not meet this definition are treated as a grievance. Grievances are still investigated fairly, and we aim to give you a
+        written answer within 5 working days.
+      </p>
+
+      <h2>3. How to complain</h2>
+      <p>
+        Email <Mail /> with the subject “Complaint”, call <a href={SITE.phoneHref}>{SITE.phone}</a>, or write to us at {SITE.address}. Please
+        include your name, contact details, what happened, the outcome you would like, and copies of any relevant documents.
+      </p>
+      <p>
+        If you complain by phone or in person, our Head of Compliance will contact you, record the details, and send you a written summary to
+        confirm that your complaint has been captured accurately.
+      </p>
+
+      <h2>4. What happens next</h2>
+      <ul>
+        <li><strong>Within 24 hours:</strong> your complaint is logged in our Complaints Register and assessed.</li>
+        <li><strong>Within 3 working days:</strong> we acknowledge your complaint in writing and confirm that an investigation is under way.</li>
+        <li><strong>Investigation:</strong> we review the relevant records, speak to the staff involved and to you. You have the right to be heard and to provide any supporting documents. On request, we will send you a copy of our complaints procedure.</li>
+        <li><strong>Within 10 working days:</strong> we aim to complete a full review of the matters raised.</li>
+        <li><strong>Within 15 working days:</strong> if we cannot resolve your complaint by then, we will contact you to explain why.</li>
+        <li><strong>Within 20 working days:</strong> we aim to send you our final written response, setting out our findings, any remedy and your options for escalation. Complex cases may take up to 8 weeks from the date we received your complaint.</li>
+      </ul>
+      <p>
+        Where a complaint is upheld, remedies may include an apology, a correction, compensation or other appropriate redress. Any financial
+        remedy is approved by our Head of Category. We also use what we learn from complaints to fix recurring problems and improve our service.
+      </p>
+
+      <h2>5. Complaints about a provider</h2>
       <p>
         Accounts, loans, policies, claims, trades, deposits and withdrawals are the responsibility of the provider you were introduced to. Please
         raise these complaints directly with the provider, using its complaints process. Each provider must handle complaints under the rules of
         its own regulator, and you may be able to escalate to that regulator or its dispute-resolution body. We will gladly help you understand who
         to contact.
       </p>
-      <h2>4. If you are not satisfied</h2>
+
+      <h2>6. If you are not satisfied</h2>
       <p>
-        If you are not satisfied with our final response, you may contact the Department of Economy and Tourism, Dubai, which issued our licence,
-        including through its consumer-protection channels at{' '}
-        <a href="https://www.consumerrights.ae" target="_blank" rel="noreferrer">www.consumerrights.ae</a>.
+        If you are not satisfied with our final response, or your complaint is not resolved within 8 weeks, you may escalate it in writing, with
+        your supporting documents:
+      </p>
+      <ul>
+        <li>
+          <strong>Capital Market Authority (CMA):</strong> where the CMA supervises our introduction activity, it can review complaints against us,
+          including through mediation and conciliation. If a matter is not settled, the parties may appeal the CMA’s determination or take the
+          matter to the Dubai Courts. We will give you the CMA’s contact details on request.
+        </li>
+        <li>
+          <strong>Department of Economy and Tourism, Dubai:</strong> which issued our commercial licence, including through its consumer-protection
+          channels at <a href="https://www.consumerrights.ae" target="_blank" rel="noreferrer">www.consumerrights.ae</a>.
+        </li>
+      </ul>
+
+      <h2>7. Records</h2>
+      <p>
+        Every complaint is recorded in our Complaints Register, together with the correspondence, our findings and any redress offered. These
+        records are kept for at least ten years from the date the complaint was received.
       </p>
     </LegalPage>
   );
 }
 
 /* ---------------------------------------------------------
-   AML & KYC Policy
+   AML & CFT Policy (public summary of the internal AML and CFT Policy, v1.1)
    --------------------------------------------------------- */
+const CDD_LEVELS = [
+  ['Low', 'Simplified due diligence', 'Every 3 years'],
+  ['Medium', 'Standard due diligence', 'Every 2 years'],
+  ['High', 'Enhanced due diligence', 'Every year'],
+];
+
 export function AmlPolicy() {
   return (
-    <LegalPage title="AML & KYC Policy" first="AML & KYC" second="Policy.">
+    <LegalPage title="AML & CFT Policy" first="AML & CFT" second="Policy.">
       <h2>1. Our commitment</h2>
       <p>
-        {SITE.name} is committed to preventing money laundering, terrorist financing and sanctions evasion. We follow applicable UAE law,
-        including Federal Decree-Law No. 20 of 2018 on Anti-Money Laundering and Combating the Financing of Terrorism (as amended), and related
-        regulations and guidance.
+        {SITE.name} takes a <strong>zero-tolerance approach</strong> to money laundering, terrorist financing, the financing of illegal
+        organisations, proliferation financing and sanctions evasion. This page summarises our Anti-Money Laundering and Counter-Terrorist
+        Financing (“AML &amp; CFT”) Policy, which applies to everyone who works for or on behalf of the Company, including directors,
+        consultants and outsourced service providers who deal with clients or client data.
       </p>
-      <h2>2. Our role as an introducer</h2>
       <p>
-        We do not hold client money, so most customer due diligence is carried out by the regulated provider you are introduced to. Each provider
-        performs its own identity verification, source-of-funds checks and ongoing monitoring before and after opening an account.
+        Any breach or suspected breach of the law is promptly investigated, escalated and, where required, reported to the competent authorities,
+        including the UAE Financial Intelligence Unit (FIU).
       </p>
-      <h2>3. What we do</h2>
+
+      <h2>2. Laws and regulations we follow</h2>
+      <p>Our policy is built on UAE federal law, international standards and the rules of our regulators, including:</p>
       <ul>
-        <li>Collect basic identity and contact information before making an introduction.</li>
-        <li>Screen clients and providers against applicable sanctions lists.</li>
-        <li>Refuse or stop an introduction where information is false, incomplete or raises concerns.</li>
-        <li>Report suspicious activity to the UAE Financial Intelligence Unit where the law requires.</li>
-        <li>Keep records of introductions for the periods required by law.</li>
-        <li>Train our team to recognise and escalate warning signs.</li>
+        <li>Federal Decree-Law No. 10 of 2025 on Anti-Money Laundering, Combating the Financing of Terrorism and Combating Proliferation Financing, which replaces Federal Decree-Law No. 20 of 2018;</li>
+        <li>Cabinet Decision No. 10 of 2019 and the related implementing regulations;</li>
+        <li>Cabinet Resolution No. 74 of 2020 on the UAE terrorist list and the implementation of UN Security Council resolutions on terrorism and proliferation of weapons of mass destruction;</li>
+        <li>Cabinet Resolution No. 58 of 2020 on the regulation of beneficial ownership procedures;</li>
+        <li>The Capital Market Authority’s regulations, including Chairman’s Decision No. 13 of 2021 on the Regulations Manual of the Financial Activity and Status Regularization Mechanisms;</li>
+        <li>The UAE Penal Code, UN Security Council sanctions and resolutions, and the Recommendations of the Financial Action Task Force (FATF).</li>
       </ul>
-      <h2>4. What we ask of you</h2>
+
+      <h2>3. Our role and client money</h2>
+      <p>
+        We are an introducer. We <strong>do not at any stage hold, receive, transfer, control or manage client money or assets</strong>. We do not
+        operate trading accounts, hold discretionary mandates, execute transactions or give payment instructions on behalf of clients. Account
+        opening, execution, settlement, payments and custody are handled directly and exclusively by the licensed and regulated institutions to
+        which clients are introduced. We receive only referral fees from those institutions for clients successfully introduced.
+      </p>
+      <p>
+        Each provider also carries out its own customer due diligence and monitoring. Our checks are in addition to, not a substitute for, the
+        provider’s checks.
+      </p>
+
+      <h2>4. Who is responsible</h2>
       <ul>
-        <li>Provide accurate, complete and up-to-date information.</li>
+        <li><strong>Head of Compliance and Money Laundering Reporting Officer (MLRO):</strong> these roles are combined. The MLRO oversees our AML &amp; CFT framework day to day, receives internal reports of suspicion, decides independently whether to report to the FIU, and is our point of contact with the authorities. The MLRO has direct access to senior management and unrestricted access to the information needed to do the job.</li>
+        <li><strong>Head of Category and Sole Shareholder:</strong> given the size and nature of our business, governance and oversight are currently exercised by the Head of Category and the Sole Shareholder. A Board of Directors will be appointed as the business grows and regulation requires.</li>
+        <li><strong>All staff:</strong> every employee must read the policy, sign a declaration that they understand it, and report any knowledge or suspicion of money laundering to the MLRO.</li>
+      </ul>
+
+      <h2>5. A risk-based approach</h2>
+      <p>
+        We assess money-laundering risk across our business at least once a year, and whenever our business changes, taking into account our
+        clients, the countries we deal with, our services, our delivery channels and partners, and new technologies. We also take into account the
+        UAE National Risk Assessment.
+      </p>
+      <p>
+        Before carrying out due diligence on a new client, we assess that client individually and assign a risk rating. We consider the client’s
+        identity and beneficial owners, the purpose of the relationship, the nature of their business, their ownership structure, their country of
+        origin, residence or incorporation, and the service involved. The rating decides the level of due diligence and how often we review the
+        client file:
+      </p>
+      <div className="my-5 overflow-hidden rounded-card border border-line bg-white text-[15px]">
+        <div className="grid grid-cols-3 gap-3 bg-panel px-5 py-3 font-semibold sm:px-7">
+          <span>Risk rating</span><span>Due diligence</span><span>File review</span>
+        </div>
+        {CDD_LEVELS.map(([rating, level, review]) => (
+          <div key={rating} className="grid grid-cols-3 gap-3 border-t border-line px-5 py-3.5 sm:px-7">
+            <span className="font-medium">{rating}</span><span className="text-copy">{level}</span><span className="text-copy">{review}</span>
+          </div>
+        ))}
+      </div>
+      <p>
+        Every high-risk relationship, and every relationship involving a politically exposed person, must be approved by senior management.
+      </p>
+
+      <h2>6. Customer due diligence</h2>
+      <p>Customer due diligence means identifying you, verifying your identity using reliable and independent sources, and understanding the nature of your business and where your funds come from. We ask for:</p>
+      <ul>
+        <li><strong>Individuals:</strong> full name (including any alias), date of birth, nationality, legal domicile and current residential address (not a P.O. box), verified from a valid passport or, if you do not hold one, an official photo ID.</li>
+        <li><strong>Companies:</strong> full legal and trading name, registered office and principal place of business, date and place of incorporation, certificate of incorporation, articles of association and the names of senior management.</li>
+        <li><strong>Foundations:</strong> a certified copy of the charter and by-laws and evidence of the appointment of the guardian or others who exercise powers.</li>
+        <li><strong>Trusts and similar arrangements:</strong> a certified copy of the trust deed and evidence of the appointment of the trustee.</li>
+        <li><strong>Beneficial owners:</strong> the natural persons who ultimately own or control a client, including anyone with a controlling interest of more than 25%, and, for trusts and foundations, the settlor, trustee, protector, founder, guardian and beneficiaries.</li>
+        <li><strong>People acting for a client:</strong> their identity and evidence of their authority to act.</li>
+      </ul>
+      <p>
+        Where we cannot see original documents, we accept copies certified by a person of good standing, such as a lawyer, notary, chartered
+        accountant or bank manager. For non-face-to-face onboarding, we verify passports and identity documents over a video call. Due diligence
+        must be completed before an introduction is made.
+      </p>
+
+      <h2>7. Enhanced due diligence and politically exposed persons</h2>
+      <p>For high-risk clients we carry out enhanced due diligence, which may include:</p>
+      <ul>
+        <li>additional identification information and the reasons for a relationship or transaction;</li>
+        <li>documentary evidence of your source of funds and source of wealth, such as bank statements, salary certificates, share certificates, audited accounts or probate documents;</li>
+        <li>a closer look at complex structures to confirm they have a genuine and legitimate purpose;</li>
+        <li>more frequent reviews and closer monitoring, and in very high-risk cases an independent third-party report.</li>
+      </ul>
+      <p>
+        If you, or a beneficial owner, are a politically exposed person (PEP), or a family member or close associate of one, we obtain senior
+        management approval, take reasonable steps to establish your source of wealth and funds, and monitor the relationship more closely. Being
+        a PEP does not automatically make a client high risk.
+      </p>
+
+      <h2>8. Business we will not accept</h2>
+      <ul>
+        <li>Clients whose ownership or control prevents us from identifying the ultimate beneficial owners, including structures using bearer shares.</li>
+        <li>Anonymous accounts, accounts in fictitious names, or nominee arrangements for undisclosed persons.</li>
+        <li>Shell banks, or banks known to allow their accounts to be used by shell banks.</li>
+        <li>Any person identified as a proscribed person by the UN, any UAE authority, UK HM Treasury or the US Office of Foreign Assets Control (OFAC).</li>
+      </ul>
+
+      <h2>9. Sanctions screening</h2>
+      <p>
+        We screen clients, potential clients, beneficial owners and authorised persons against the UN Security Council Consolidated List and the
+        UAE Local Terrorist List, as well as EU, UK HM Treasury and US OFAC lists, using screening tools such as World-Check (LSEG). Screening takes
+        place before onboarding, when client information changes or is reviewed, and without delay whenever the lists are updated. We subscribe to
+        updates from the UAE Executive Office for Control and Non-Proliferation.
+      </p>
+      <p>
+        If we find a confirmed match, we apply the measures required by Cabinet Resolution No. 74 of 2020 without delay (within 24 hours) and
+        without prior notice, and report through the FIU’s goAML platform within five business days. For a potential match, we suspend any service
+        and file a Partial Name Match Report until the authorities instruct us. These measures also apply to entities more than 50% owned or
+        controlled by a designated person, and to anyone acting on their behalf.
+      </p>
+
+      <h2>10. Ongoing monitoring</h2>
+      <p>
+        We keep client information up to date and watch for activity that does not fit what we know about a client, such as unusually large or
+        complex requests with no clear economic purpose. We review client files on the schedule set by their risk rating, and sooner if there is a
+        material change in the relationship, the client’s ownership or our own requirements.
+      </p>
+
+      <h2>11. Reporting suspicious activity</h2>
+      <p>
+        Staff must report any knowledge or suspicion of money laundering or terrorist financing to the MLRO, even if no business relationship is
+        formed. The MLRO investigates, documents the decision and, where required, files a Suspicious Activity or Transaction Report with the FIU
+        through goAML and notifies the relevant supervisory authority. Reports made in good faith are protected by law.
+      </p>
+      <p>
+        UAE law makes it a criminal offence to “tip off” anyone that a report has been or may be made. For this reason we may be unable to explain
+        why we have declined or stopped an introduction.
+      </p>
+
+      <h2>12. If due diligence cannot be completed</h2>
+      <p>
+        If we cannot complete due diligence, we will not make an introduction or provide a service, and we may end an existing relationship and
+        consider whether a report to the FIU is required.
+      </p>
+
+      <h2>13. Reliance on third parties</h2>
+      <p>
+        We may rely on due diligence carried out by a regulated financial institution, law firm, notary or audit firm, but only where it meets FATF
+        standards, can provide the underlying documents to us without delay, and is approved in advance by the MLRO. We remain responsible for the
+        result.
+      </p>
+
+      <h2>14. Training</h2>
+      <p>
+        All relevant staff receive AML &amp; CFT training when they join and at least once a year. Training covers the law, our procedures, how to
+        recognise and report suspicious activity, current money-laundering methods and sanctions obligations.
+      </p>
+
+      <h2>15. Record keeping</h2>
+      <p>
+        We keep due diligence records, risk assessments, internal and external reports, correspondence and training records for at least six years
+        from the end of the business relationship or the date of the report, whichever is later. Records are kept in English (or with a
+        translation) and can be produced to the authorities promptly on request.
+      </p>
+
+      <h2>16. What we ask of you</h2>
+      <ul>
+        <li>Provide accurate, complete and up-to-date information and tell us about any material change.</li>
+        <li>Answer questions about your source of funds and wealth, and the purpose of the relationship, when asked.</li>
         <li>Use only accounts and payment methods in your own name with any provider.</li>
         <li>Never ask us, or anyone claiming to represent us, to receive or transfer money on your behalf.</li>
       </ul>
-      <h2>5. Contact</h2>
-      <p>Questions about this policy can be sent to <Mail />.</p>
+
+      <h2>17. Review and contact</h2>
+      <p>
+        This policy is reviewed by the Head of Compliance and MLRO, and its effectiveness is tested through our compliance monitoring programme and
+        by internal or external auditors. Questions can be sent to our compliance team at <Mail />.
+      </p>
     </LegalPage>
   );
 }
@@ -270,7 +539,23 @@ export function RiskDisclosure() {
       </ul>
       <h2>6. Availability</h2>
       <p>Products and services offered by providers vary and may not be available to every client. Availability depends on the provider, your eligibility and the law that applies to you.</p>
-      <h2>7. Contact</h2>
+      <h2>7. How we manage our own risks</h2>
+      <p>
+        Under our Risk Management Policy, we identify, assess, control and monitor the risks in our own business so that we can keep serving
+        clients reliably and in line with our regulatory obligations.
+      </p>
+      <ul>
+        <li><strong>Risks we track:</strong> regulatory and conduct risk, money-laundering and financial-crime risk, liquidity risk, operational and technology risk (including cyber risk), and strategic and reputational risk.</li>
+        <li><strong>How risks are scored:</strong> each risk is rated for likelihood and impact on a 1–5 scale. We then assess the strength of our controls to arrive at a residual risk of high, medium or low, recorded in a risk register with a named owner.</li>
+        <li><strong>Three lines of defence:</strong> business managers own and control their risks; our compliance and risk-management function, led by the Head of Compliance, sets standards and challenges them; and an independent internal audit, which we intend to outsource to an accredited accounting firm, reviews the whole framework.</li>
+        <li><strong>Controls:</strong> background checks on staff and contractors, a code of conduct with annual declarations, information barriers to protect confidential information, dual review (maker-checker) of onboarding and KYC data, two-person approval for commitments of company assets, and restricted access to our premises and systems.</li>
+        <li><strong>Resilience:</strong> we maintain a business continuity plan and a disaster recovery plan.</li>
+        <li><strong>Prudence:</strong> we only take on risks we understand and can manage, analyse new services before launching them, keep enough capital to meet regulatory requirements and our obligations as they fall due, and avoid concentrating our business in high-risk jurisdictions, sectors or client types.</li>
+        <li><strong>Review:</strong> the full framework is reviewed at least once a year, with more time-sensitive areas reviewed more often.</li>
+      </ul>
+      <p>These measures protect our own operations. They do not reduce the risks of any product you take out with a provider, which are described above.</p>
+
+      <h2>8. Contact</h2>
       <p>If you have any questions about this disclosure, please <Link to="/contact">contact us</Link> or email <Mail />.</p>
     </LegalPage>
   );
@@ -316,7 +601,11 @@ export function Privacy() {
         Our website uses only the technologies needed for it to function. Embedded third-party content, such as maps or fonts, may be subject to
         the privacy policies of those third parties. You can control cookies through your browser settings.
       </p>
-      <h2>7. Security</h2>
+      <h2>7. Security and confidentiality</h2>
+      <p>
+        Everyone who works for us is bound by confidentiality obligations under our Code of Conduct and may access client information only where
+        needed for their role. Access to our premises and systems is restricted, and onboarding and KYC data is subject to dual review.
+      </p>
       <p>We take reasonable technical and organisational measures to protect personal information. However, no transmission over the internet is completely secure.</p>
       <h2>8. Changes and contact</h2>
       <p>
@@ -344,6 +633,10 @@ export function Terms() {
       <p>
         We do not accept client funds, open accounts, approve applications or execute transactions. Any agreement for a financial product is made
         directly between you and the relevant provider, under that provider’s terms.
+      </p>
+      <p>
+        Every introduction is subject to our <Link to="/aml-policy">AML &amp; CFT Policy</Link>. We may decline or stop an introduction if we cannot
+        complete due diligence or where the law requires, and we may not always be able to give a reason.
       </p>
       <h2>3. Information on this website</h2>
       <p>
