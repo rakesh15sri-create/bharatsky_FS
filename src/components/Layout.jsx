@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import Icon from './Icons';
 import { Button, Container } from './ui';
@@ -30,8 +30,82 @@ function Logo({ className = '' }) {
   );
 }
 
+const isLegalPath = pathname => LEGAL_LINKS.some(([, to]) => to === pathname);
+
+const Chevron = ({ className = '' }) => (
+  <svg viewBox="0 0 12 12" aria-hidden="true" className={`size-3 transition-transform duration-200 ${className}`}>
+    <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+/* Desktop "Legal" dropdown: opens on hover or click, closes on navigation, Escape or outside click */
+function LegalDropdown() {
+  const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+  const ref = useRef(null);
+  const active = isLegalPath(pathname);
+
+  useEffect(() => setOpen(false), [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = e => e.key === 'Escape' && setOpen(false);
+    const onClick = e => !ref.current?.contains(e.target) && setOpen(false);
+    window.addEventListener('keydown', onKey);
+    document.addEventListener('mousedown', onClick);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.removeEventListener('mousedown', onClick);
+    };
+  }, [open]);
+
+  return (
+    <li ref={ref} className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+      <button
+        type="button"
+        aria-haspopup="true"
+        aria-expanded={open}
+        onClick={() => setOpen(o => !o)}
+        className={`flex cursor-pointer items-center gap-1.5 rounded-full px-4 py-2 text-[13px] transition-colors ${
+          active ? 'bg-brand text-white' : 'text-[#d8d8d8] hover:text-white'
+        }`}
+      >
+        Legal
+        <Chevron className={open ? 'rotate-180' : ''} />
+      </button>
+      {/* pt-3 bridges the gap so the menu stays open while the pointer moves down */}
+      <div className={`absolute left-1/2 top-full -translate-x-1/2 pt-3 transition duration-200 ${open ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-1 opacity-0'}`}>
+        <ul className="w-[250px] rounded-2xl bg-night p-2 shadow-[0_20px_40px_-15px_rgba(0,0,0,.6)] ring-1 ring-white/10">
+          {LEGAL_LINKS.map(([label, to]) => (
+            <li key={to}>
+              <NavLink
+                to={to}
+                tabIndex={open ? 0 : -1}
+                className={({ isActive }) =>
+                  `block rounded-xl px-4 py-2.5 text-[13px] transition-colors ${isActive ? 'bg-brand text-white' : 'text-[#d8d8d8] hover:bg-white/[.06] hover:text-white'}`
+                }
+              >
+                {label}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </li>
+  );
+}
+
 /* Full-screen menu for phones and tablets (hidden from lg up) */
 function MobileMenu({ open, onClose }) {
+  const { pathname } = useLocation();
+  const [legalOpen, setLegalOpen] = useState(false);
+  const legalActive = isLegalPath(pathname);
+
+  // collapse the Legal list whenever the menu closes
+  useEffect(() => {
+    if (!open) setLegalOpen(false);
+  }, [open]);
+
   return (
     <div
       id="mobile-menu"
@@ -74,6 +148,47 @@ function MobileMenu({ open, onClose }) {
               </NavLink>
             </li>
           ))}
+          <li
+            style={{ transitionDelay: open ? `${80 + NAV.length * 50}ms` : '0ms' }}
+            className={`border-b border-white/10 transition duration-500 ${open ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
+          >
+            <button
+              type="button"
+              aria-expanded={legalOpen}
+              aria-controls="mobile-legal-links"
+              tabIndex={open ? 0 : -1}
+              onClick={() => setLegalOpen(o => !o)}
+              className={`group flex w-full cursor-pointer items-center justify-between py-4 text-left text-[clamp(30px,9vw,48px)] font-medium tracking-[-.03em] transition-colors sm:py-5 ${
+                legalActive ? 'text-brand' : 'text-white hover:text-brand'
+              }`}
+            >
+              <span className="flex items-baseline gap-4">
+                <span className="text-xs font-semibold tracking-normal text-[#6b6b6b]">{String(NAV.length + 1).padStart(2, '0')}</span>
+                Legal
+              </span>
+              <span className={`grid size-10 place-items-center rounded-full text-white transition ${legalOpen ? 'bg-brand' : 'bg-white/[.06] group-hover:bg-brand'}`}>
+                <Chevron className={`size-3.5 ${legalOpen ? 'rotate-180' : ''}`} />
+              </span>
+            </button>
+            <div id="mobile-legal-links" className={`grid transition-[grid-template-rows] duration-300 ${legalOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+              <ul className="overflow-hidden">
+                {LEGAL_LINKS.map(([label, to]) => (
+                  <li key={to}>
+                    <NavLink
+                      to={to}
+                      onClick={onClose}
+                      tabIndex={open && legalOpen ? 0 : -1}
+                      className={({ isActive }) =>
+                        `block py-2.5 pl-9 text-[17px] transition-colors last:mb-4 ${isActive ? 'text-brand' : 'text-[#cfcfcf] hover:text-brand'}`
+                      }
+                    >
+                      {label}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </li>
         </ul>
       </nav>
 
@@ -132,6 +247,7 @@ function Header() {
             {NAV.map(({ to, label }) => (
               <li key={to}><NavLink to={to} end className={pill}>{label}</NavLink></li>
             ))}
+            <LegalDropdown />
           </ul>
 
           <div className="flex items-center gap-2 lg:gap-6">
