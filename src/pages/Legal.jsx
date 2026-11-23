@@ -1,16 +1,16 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Container, Muted, Panel, PageHero, useTitle } from '../components/ui';
-import { LEGAL_LINKS, LICENCE, SITE } from '../data/site';
+import { CMA_LICENCE, LEGAL_LINKS, LICENCE, SITE } from '../data/site';
 
 const UPDATED = '26 October 2026';
 
 /* Shared wrapper: hero + readable prose column + links to the other legal documents */
-function LegalPage({ title, first, second, children }) {
+function LegalPage({ title, first, second, updated = UPDATED, children }) {
   useTitle(title);
   const { pathname } = useLocation();
   return (
     <>
-      <PageHero crumb={title} chip="Legal" lines={false} title={<>{first} <Muted>{second}</Muted></>} sub={`Last updated: ${UPDATED}`} />
+      <PageHero crumb={title} chip="Legal" lines={false} title={<>{first} <Muted>{second}</Muted></>} sub={`Last updated: ${updated}`} />
       <Panel>
         <Container className="max-w-[820px] [&_a]:text-brand [&_a]:underline [&_h2]:mb-3.5 [&_h2]:mt-[50px] [&_h2]:text-[26px] [&_h2]:font-medium [&_h2]:tracking-[-.015em] [&_h2:first-child]:mt-0 [&_li]:text-[15px] [&_li]:leading-[1.75] [&_li]:text-copy [&_p]:text-[15px] [&_p]:leading-[1.75] [&_p]:text-copy [&_p+p]:mt-3 [&_ul]:my-3 [&_ul]:grid [&_ul]:list-disc [&_ul]:gap-1.5 [&_ul]:pl-[22px]">
           {children}
@@ -36,7 +36,8 @@ function LicenceStatement() {
     <p>
       {SITE.name} (“Bhaarat Sky”, “we”, “us”) is a limited liability company (single owner) registered in Dubai, United Arab Emirates. We are
       licensed by the {LICENCE.authority} under Commercial Licence No. {LICENCE.number} (Commercial Register No. {LICENCE.register}) for the
-      activity “{LICENCE.activity}”. Our registered office is at {SITE.address}.
+      activity “{LICENCE.activity}”. We also hold {CMA_LICENCE.authority} licence No. {CMA_LICENCE.number} for the activity “{CMA_LICENCE.activity}”.
+      Our registered office is at {SITE.address}.
     </p>
   );
 }
@@ -58,19 +59,45 @@ const LICENCE_ROWS = [
   ['Registered office', SITE.address],
 ];
 
-export function Licences() {
+const CMA_LICENCE_ROWS = [
+  ['Issuing authority', CMA_LICENCE.authority],
+  ['Licence no.', CMA_LICENCE.number],
+  ['CMA register reference', CMA_LICENCE.registerReference],
+  ['Licence category', CMA_LICENCE.category],
+  ['Licensed activity', CMA_LICENCE.activity],
+  ['Issue date', CMA_LICENCE.issued],
+  ['Valid until', CMA_LICENCE.validUntil],
+];
+
+function LicenceDetails({ rows }) {
   return (
-    <LegalPage title="Licences & Regulation" first="Licences &" second="Regulation.">
-      <h2>1. Our licence</h2>
-      <LicenceStatement />
       <dl className="mt-6 overflow-hidden rounded-card border border-line bg-white">
-        {LICENCE_ROWS.map(([k, v]) => (
+        {rows.map(([k, v]) => (
           <div key={k} className="grid gap-1 border-t border-line px-5 py-4 text-[15px] first:border-t-0 sm:grid-cols-[230px_1fr] sm:gap-5 sm:px-7">
             <dt className="text-grey">{k}</dt>
             <dd className="font-medium">{v}</dd>
           </div>
         ))}
       </dl>
+  );
+}
+
+export function Licences() {
+  return (
+    <LegalPage title="Licences & Regulation" first="Licences &" second="Regulation." updated="23 November 2026">
+      <h2>1. Our licences</h2>
+      <LicenceStatement />
+      <h3 className="mt-6 text-lg font-medium">Capital Market Authority licence</h3>
+      <LicenceDetails rows={CMA_LICENCE_ROWS} />
+      <p className="mt-4">
+        <a href={CMA_LICENCE.registerUrl}>Verify this licence on the official CMA register</a>.
+      </p>
+      <p>
+        The CMA issued this licence under <a href={CMA_LICENCE.lawUrl}>{CMA_LICENCE.law}</a>. You can also verify it by scanning the QR code
+        on the official certificate. A copy is available on request at <Mail />.
+      </p>
+      <h3 className="mt-6 text-lg font-medium">Dubai commercial licence</h3>
+      <LicenceDetails rows={LICENCE_ROWS} />
       <p className="mt-4">
         The authenticity of our commercial licence can be verified with the Department of Economy and Tourism, Dubai, using the QR code on the
         official licence document. A copy is available on request at <Mail />.
