@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import Icon from './Icons';
 import { Button, Container } from './ui';
-import { LEGAL_LINKS, LICENCE, NAV, SITE } from '../data/site';
+import { CMA_LICENCE, LEGAL_LINKS, LICENCE, NAV, SITE } from '../data/site';
 import { SERVICES } from '../data/services';
 
 function ScrollManager() {
@@ -319,7 +319,8 @@ const DISCLOSURES = [
       <>
         A limited liability company (single owner) registered in Dubai, United Arab Emirates, and licensed by the {LICENCE.authority} under{' '}
         <strong>Commercial Licence No. {LICENCE.number}</strong> (Commercial Register No. {LICENCE.register}; Dubai Chamber Membership No.{' '}
-        {LICENCE.chamber}) for the activity <strong>“{LICENCE.activity}”</strong>. Registered office: {SITE.address}.
+        {LICENCE.chamber}) for the activity <strong>“{LICENCE.activity}”</strong>. The commercial licence is valid until {LICENCE.validUntil}.
+        Registered office: {SITE.address}.
       </>
     ),
   },
@@ -336,14 +337,14 @@ const DISCLOSURES = [
     ),
   },
   {
-    label: 'Licence verification',
+    label: 'Capital Market Authority licence',
     icon: 'shield',
     tone: 'green',
     body: (
       <>
-        You can verify our licence with the {LICENCE.authorityShort} using <strong>Licence No. {LICENCE.number}</strong>. Our licence is valid
-        until {LICENCE.validUntil}. Full details are on our <Link to="/licences-and-regulation">Licences &amp; Regulation</Link> page. Always check
-        the licence of any provider we introduce with its own regulator.
+        <strong>Licence No. {CMA_LICENCE.number}</strong> covers the activity <strong>“{CMA_LICENCE.activity}”</strong> and is valid
+        until {CMA_LICENCE.validUntil}. <a href={CMA_LICENCE.registerUrl}>Verify this licence on the CMA register</a>.
+        See <Link to="/licences-and-regulation">Licences &amp; Regulation</Link> for full details.
       </>
     ),
   },
